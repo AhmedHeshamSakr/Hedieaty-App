@@ -1,18 +1,14 @@
-// main.dart
 import 'package:flutter/material.dart';
-import 'add_friend_page.dart';
-import 'home_page.dart';
-import 'event_list_page.dart';
-import 'gift_list_page.dart';
-import 'gift_details_page.dart';
-import 'profile_page.dart';
-import 'my_pledged_gifts_page.dart';
-import 'login_Page.dart';
-import 'sign_up_page.dart';
-
-
+import 'package:hedieaty/core/di/service_locator.dart'; // Dependency injection
+import 'package:hedieaty/presentation/routes/app_router.dart'; // Route management
+import 'package:hedieaty/core/constants/app_styles.dart'; // Global styling
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize dependencies
+  setupServiceLocator();
+
   runApp(const HedieatyApp());
 }
 
@@ -23,18 +19,9 @@ class HedieatyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Hedieaty',
-      initialRoute: '/login',
-      routes: {
-        '/login': (context) => const LoginPage(),
-        '/signUp': (context) => const SignUpPage(),
-        '/home': (context) => const HomePage(userName: 'Ahmed'),
-        '/eventList': (context) => EventListPage(),
-        '/giftList': (context) => GiftListPage(),
-        '/giftDetails': (context) => const GiftDetailsPage(),
-        '/profile': (context) => const ProfilePage(),
-        '/myPledgedGifts': (context) => MyPledgedGiftsPage(),
-        '/addFriend': (context) => const AddFriendPage(),
-      },
+      theme: AppStyles.appTheme, // Global theme
+      initialRoute: RouteNames.login, // Initial route
+      onGenerateRoute: AppRouter.onGenerateRoute, // Route generator
     );
   }
 }
