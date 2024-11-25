@@ -41,4 +41,8 @@ class AppStyles {
     fontWeight: FontWeight.bold,
     color: AppColors.onPrimary,
   );
+
+  static var appBarTextStyle;
+
+  static var appTheme;
 }

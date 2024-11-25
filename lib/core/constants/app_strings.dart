@@ -1,7 +1,7 @@
 class AppStrings {
   // General
-  static const String appName = 'GiftMate';
-  static const String welcomeMessage = 'Welcome to GiftMate!';
+  static const String appName = 'Hedieaty';
+  static const String welcomeMessage = 'Welcome to Hedieaty';
 
   // Auth
   static const String login = 'Login';

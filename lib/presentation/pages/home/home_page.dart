@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
             ),
           ],
         ),
-        backgroundColor: AppColors.primaryColor,
+        backgroundColor: AppColors.primary,
         elevation: 5.0,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
@@ -39,7 +39,7 @@ class HomePage extends StatelessWidget {
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 50),
-                backgroundColor: AppColors.primaryColor,
+                backgroundColor: AppColors.primary,
               ),
               onPressed: controller.createEvent,
               child: const Text("Create Your Own Event/List"),

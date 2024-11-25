@@ -19,5 +19,5 @@ class AppColors {
 
   // Error colors
   static const Color error = Color(0xFFB00020); // Red
-  static const Color onError = Color(0xFFFFFFFF); // White
+  static const Color onError = Color(0xFFFFFFFF);
 }

@@ -1,64 +1,56 @@
 import 'package:flutter/material.dart';
-import '../../../domain/usecases/login_user_usecase.dart';
-import '../../../domain/usecases/register_user_usecase.dart';
+import '../../../data/utils/firebase_auth_service.dart';
 
 class AuthController extends ChangeNotifier {
-  // Controllers and form keys
-  final loginFormKey = GlobalKey<FormState>();
-  final signUpFormKey = GlobalKey<FormState>();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  final nameController = TextEditingController();
+  final FirebaseAuthService _authService;
 
-  bool isLoading = false;
+  AuthController(this._authService);
 
-  final LoginUserUseCase loginUserUseCase;
-  final RegisterUserUseCase registerUserUseCase;
+  String? _errorMessage;
+  bool _isLoading = false;
 
-  AuthController({
-    required this.loginUserUseCase,
-    required this.registerUserUseCase,
-  });
+  String? get errorMessage => _errorMessage;
+  bool get isLoading => _isLoading;
 
-  Future<void> loginUser() async {
-    if (!loginFormKey.currentState!.validate()) return;
-
-    isLoading = true;
-    notifyListeners();
-
+  /// Signup method
+  Future<bool> signUp(String email, String password) async {
+    _setLoading(true);
     try {
-      await loginUserUseCase.execute(emailController.text, passwordController.text);
-      // Navigate to home page
+      await _authService.signUp(email, password);
+      _setLoading(false);
+      return true; // Signup successful
     } catch (e) {
-      // Handle error
-    } finally {
-      isLoading = false;
+      _errorMessage = e.toString();
+      _setLoading(false);
       notifyListeners();
+      return false; // Signup failed
     }
   }
 
-  Future<void> registerUser() async {
-    if (!signUpFormKey.currentState!.validate()) return;
-
-    isLoading = true;
-    notifyListeners();
-
+  /// Login method
+  Future<bool> login(String email, String password) async {
+    _setLoading(true);
     try {
-      await registerUserUseCase.execute(nameController.text, emailController.text, passwordController.text);
-      // Navigate to login page
+      await _authService.signIn(email, password);
+      _setLoading(false);
+      return true; // Login successful
     } catch (e) {
-      // Handle error
-    } finally {
-      isLoading = false;
+      _errorMessage = e.toString();
+      _setLoading(false);
       notifyListeners();
+      return false; // Login failed
     }
   }
 
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    nameController.dispose();
-    super.dispose();
+  /// Reset state
+  void clearError() {
+    _errorMessage = null;
+    notifyListeners();
+  }
+
+  /// Private helper for loading state
+  void _setLoading(bool value) {
+    _isLoading = value;
+    notifyListeners();
   }
 }

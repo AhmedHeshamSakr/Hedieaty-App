@@ -1,50 +1,90 @@
 import 'package:flutter/material.dart';
+import '../auth//auth_controller.dart';
 import 'package:provider/provider.dart';
-import '../../../core/utils/validators.dart';
-import '../../../pages/auth/auth_controller.dart';
 
-class SignUpPage extends StatelessWidget {
-  const SignUpPage({super.key});
+class SignupPage extends StatelessWidget {
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  SignupPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final authController = Provider.of<AuthController>(context, listen: false);
+    final authController = Provider.of<AuthController>(context);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Sign Up')),
+      appBar: AppBar(
+        title: const Text('Signup'),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
-          key: authController.signUpFormKey,
+          key: _formKey,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               TextFormField(
-                controller: authController.nameController,
-                decoration: const InputDecoration(labelText: 'Full Name'),
-                validator: Validators.nonEmptyValidator,
-              ),
-              const SizedBox(height: 16),
-              TextFormField(
-                controller: authController.emailController,
+                controller: _emailController,
                 decoration: const InputDecoration(labelText: 'Email'),
                 keyboardType: TextInputType.emailAddress,
-                validator: Validators.emailValidator,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your email';
+                  }
+                  final emailRegex = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
+                  if (!emailRegex.hasMatch(value)) {
+                    return 'Please enter a valid email address';
+                  }
+                  return null;
+                },
               ),
-              const SizedBox(height: 16),
               TextFormField(
-                controller: authController.passwordController,
+                controller: _passwordController,
                 decoration: const InputDecoration(labelText: 'Password'),
                 obscureText: true,
-                validator: Validators.passwordValidator,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your password';
+                  }
+                  if (value.length < 6) {
+                    return 'Password must be at least 6 characters long';
+                  }
+                  return null;
+                },
               ),
               const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: authController.registerUser,
-                child: authController.isLoading
-                    ? const CircularProgressIndicator(color: Colors.white)
-                    : const Text('Sign Up'),
-              ),
+              if (authController.isLoading)
+                const Center(child: CircularProgressIndicator())
+              else
+                ElevatedButton(
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      final success = await authController.signUp(
+                        _emailController.text.trim(),
+                        _passwordController.text.trim(),
+                      );
+                      if (success) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Signup Successful!')),
+                        );
+                        Navigator.pop(context); // Navigate back to login
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(authController.errorMessage ?? 'Error'),
+                          ),
+                        );
+                      }
+                    }
+                  },
+                  child: const Text('Signup'),
+                ),
+              if (authController.errorMessage != null)
+                Text(
+                  authController.errorMessage!,
+                  style: const TextStyle(color: Colors.red),
+                ),
             ],
           ),
         ),

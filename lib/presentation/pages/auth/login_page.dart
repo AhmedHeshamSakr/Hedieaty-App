@@ -1,50 +1,87 @@
 import 'package:flutter/material.dart';
+import'../auth/auth_controller.dart';
 import 'package:provider/provider.dart';
-import '../../../core/utils/validators.dart';
-import '../../../pages/auth/auth_controller.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final authController = Provider.of<AuthController>(context, listen: false);
+    final authController = Provider.of<AuthController>(context);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Login')),
+      appBar: AppBar(
+        title: const Text('Login'),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
-          key: authController.loginFormKey,
+          key: _formKey,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               TextFormField(
-                controller: authController.emailController,
+                controller: _emailController,
                 decoration: const InputDecoration(labelText: 'Email'),
                 keyboardType: TextInputType.emailAddress,
-                validator: Validators.emailValidator,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your email';
+                  }
+                  final emailRegex = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
+                  if (!emailRegex.hasMatch(value)) {
+                    return 'Please enter a valid email address';
+                  }
+                  return null;
+                },
               ),
-              const SizedBox(height: 16),
               TextFormField(
-                controller: authController.passwordController,
+                controller: _passwordController,
                 decoration: const InputDecoration(labelText: 'Password'),
                 obscureText: true,
-                validator: Validators.passwordValidator,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your password';
+                  }
+                  return null;
+                },
               ),
               const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: authController.loginUser,
-                child: authController.isLoading
-                    ? const CircularProgressIndicator(color: Colors.white)
-                    : const Text('Login'),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/signUp');
-                },
-                child: const Text("Don't have an account? Sign Up"),
-              ),
+              if (authController.isLoading)
+                const Center(child: CircularProgressIndicator())
+              else
+                ElevatedButton(
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      final success = await authController.login(
+                        _emailController.text.trim(),
+                        _passwordController.text.trim(),
+                      );
+                      if (success) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Login Successful!')),
+                        );
+                        // Navigate to the next screen
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(authController.errorMessage ?? 'Error'),
+                          ),
+                        );
+                      }
+                    }
+                  },
+                  child: const Text('Login'),
+                ),
+              if (authController.errorMessage != null)
+                Text(
+                  authController.errorMessage!,
+                  style: const TextStyle(color: Colors.red),
+                ),
             ],
           ),
         ),
