@@ -1,3 +1,5 @@
+import '../../data/local/models/event_model.dart';
+import '../../data/local/models/gift_model.dart';
 import '/data/local/models/user_model.dart';
 
 abstract class UserRepository {
@@ -12,4 +14,10 @@ abstract class UserRepository {
 
   /// Signs out the current user.
   Future<void> signOut();
+
+  Future<List<EventModel>> getUserCreatedEvents(int userId);
+
+  Future<List<GiftModel>> getUserPledgedGifts(int userId);
+
+  Future<void> pledgeGift(int giftId, int userId);
 }

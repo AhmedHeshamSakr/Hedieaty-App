@@ -1,11 +1,11 @@
 import '../../domain/repositories/user_repository.dart';
 import '../local/datasources/sqlite_user_datasource.dart';
-import '../utils/firebase_auth_service.dart';
+import '../local/models/event_model.dart';
+import '../local/models/gift_model.dart';
 import '../local/models/user_model.dart';
+import '../utils/firebase_auth_service.dart';
 
-
-
-class UserRepositoryImpl implements UserRepository{
+class UserRepositoryImpl implements UserRepository {
   final SqliteUserDatasource localDatasource;
   final FirebaseAuthService remoteAuthService;
 
@@ -16,7 +16,7 @@ class UserRepositoryImpl implements UserRepository{
   Future<UserModel?> getUserProfile(String userId) async {
     try {
       // Attempt to fetch the user from the local database
-      final localUser = await localDatasource.getUserById(int.parse(userId));
+      final localUser = await localDatasource.getUserById(userId);
       if (localUser != null) return localUser;
 
       // Fetch from Firebase if not found locally
@@ -54,6 +54,7 @@ class UserRepositoryImpl implements UserRepository{
   }
 
   /// Sign out the current user from Firebase Authentication
+  @override
   Future<void> signOut() async {
     try {
       await remoteAuthService.signOut();
@@ -63,11 +64,42 @@ class UserRepositoryImpl implements UserRepository{
   }
 
   /// Delete a user profile from the local SQLite database
-  Future<void> deleteUser(String userId) async {
+  Future<void> deleteUser(int userId) async {
     try {
-      await localDatasource.deleteUser(userId);
+      await localDatasource.deleteUser(userId as String);
     } catch (e) {
       throw Exception('Error deleting user: ${e.toString()}');
+    }
+  }
+
+  /// Fetch events created by the user
+  @override
+  Future<List<EventModel>> getUserCreatedEvents(int userId) async {
+    try {
+      return await localDatasource.getUserCreatedEvents(userId as String);
+    } catch (e) {
+      throw Exception('Error fetching user-created events: ${e.toString()}');
+    }
+  }
+
+  /// Fetch gifts pledged by the user
+  @override
+  Future<List<GiftModel>> getUserPledgedGifts(int userId) async {
+    try {
+      final gifts = await localDatasource.getPledgedGiftsByUser(userId as String);
+      return gifts;
+    } catch (e) {
+      throw Exception('Error fetching pledged gifts: ${e.toString()}');
+    }
+  }
+
+  /// Pledge a gift
+  @override
+  Future<void> pledgeGift(int giftId, int userId) async {
+    try {
+      await localDatasource.pledgeGift(giftId as String, userId as String);
+    } catch (e) {
+      throw Exception('Error pledging gift: ${e.toString()}');
     }
   }
 }

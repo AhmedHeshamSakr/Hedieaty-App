@@ -36,6 +36,7 @@ The app follows **Clean Architecture**, ensuring modularity, scalability, and ma
 ├── presentation/       # User interface layer
 │   ├── pages/          # UI components and controllers
 │   ├── routes/         # App navigation setup
+│   ├── widgets/         # App navigation setup
 ├── test/               # Automated testing
 │   ├── unit/           # Unit tests for core functionalities
 │   ├── widget/         # Tests for UI components

@@ -1,27 +1,23 @@
-import 'package:firebase_database/firebase_database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/event_dto.dart';
 
-class FirebaseEventDataSource {
-  final DatabaseReference _database = FirebaseDatabase.instance.ref();
+class FirestoreEventDataSource {
+  final CollectionReference _eventsCollection = FirebaseFirestore.instance.collection('events');
 
   Future<void> addEvent(EventDTO eventDTO) async {
-    final eventRef = _database.child('events').push();
-    await eventRef.set(eventDTO.toMap());
+    await _eventsCollection.add(eventDTO.toMap());
   }
 
   Future<void> updateEvent(String eventId, EventDTO eventDTO) async {
-    final eventRef = _database.child('events').child(eventId);
-    await eventRef.update(eventDTO.toMap());
+    await _eventsCollection.doc(eventId).update(eventDTO.toMap());
   }
 
   Future<void> deleteEvent(String eventId) async {
-    final eventRef = _database.child('events').child(eventId);
-    await eventRef.remove();
+    await _eventsCollection.doc(eventId).delete();
   }
 
   Future<List<EventDTO>> getEventsByUserId(String userId) async {
-    final snapshot = await _database.child('events').orderByChild('userId').equalTo(userId).once();
-    final eventsMap = snapshot.snapshot.value as Map<dynamic, dynamic>;
-    return eventsMap.values.map((event) => EventDTO.fromMap(event)).toList();
+    final querySnapshot = await _eventsCollection.where('userId', isEqualTo: userId).get();
+    return querySnapshot.docs.map((doc) => EventDTO.fromMap(doc.data() as Map<String, dynamic>, doc.id)).toList();
   }
 }

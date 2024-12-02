@@ -1,27 +1,31 @@
 import 'dart:async';
-import 'package:sqflite/sqflite.dart';
+import 'dart:io';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:path/path.dart';
 
 class DatabaseHelper {
   static Database? _database;
-
-  // Private constructor to prevent multiple instances
   DatabaseHelper._privateConstructor();
 
   static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
 
   Future<Database> get database async {
     if (_database != null) return _database!;
-    // Initialize the database when it's not already done
     _database = await _initDatabase();
     return _database!;
   }
 
   Future<Database> _initDatabase() async {
-    // Get the path to the database file
-    String path = join(await getDatabasesPath(), 'app_database.db');
+    // Initialize ffi loader for desktop platforms
+    if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+      sqfliteFfiInit();
+      databaseFactory = databaseFactoryFfi;
+    }
 
-    // Open the database and create tables
+    // Get the path to the database file
+    String path = join(await _getDatabasePath(), 'app_database.db');
+
+    // Open the database
     return openDatabase(
       path,
       version: 1,
@@ -31,28 +35,37 @@ class DatabaseHelper {
       onCreate: (db, version) => _createTables(db),
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < 2) {
-          // Example: Add a new column or table
-          // await db.execute('ALTER TABLE users ADD COLUMN age INTEGER');
+          // Example schema update
         }
       },
-      // onDowngrade: (db, oldVersion, newVersion) async {
-      //   // Handle schema downgrades if needed
-      // },
     );
   }
 
+  Future<String> _getDatabasePath() async {
+    if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+      return Directory.current.path; // Use current directory for desktop
+    } else {
+      return await getDatabasesPath(); // Use standard path for mobile
+    }
+  }
+
   Future<void> _createTables(Database db) async {
-    // Creating the 'users' table
+    // Creating tables
     await db.execute('''
-      CREATE TABLE users(
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT,
-        email TEXT,
-        preferences TEXT
-      );
+      CREATE TABLE users_new (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      firebase_uid TEXT NOT NULL,
+      name TEXT,
+      email TEXT,
+      preferences TEXT
+    );
+    INSERT INTO users_new (id, firebase_uid, name, email, preferences)
+    SELECT id, NULL, name, email, preferences FROM users;
+    DROP TABLE users;
+    ALTER TABLE users_new RENAME TO users;
+
     ''');
 
-    // Creating the 'events' table
     await db.execute('''
       CREATE TABLE events(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -65,7 +78,6 @@ class DatabaseHelper {
       );
     ''');
 
-    // Creating the 'gifts' table
     await db.execute('''
       CREATE TABLE gifts(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -79,7 +91,6 @@ class DatabaseHelper {
       );
     ''');
 
-    // Creating the 'friends' table
     await db.execute('''
       CREATE TABLE friends(
         userId INTEGER,

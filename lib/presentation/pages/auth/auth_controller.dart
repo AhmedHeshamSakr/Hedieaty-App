@@ -12,45 +12,70 @@ class AuthController extends ChangeNotifier {
   String? get errorMessage => _errorMessage;
   bool get isLoading => _isLoading;
 
-  /// Signup method
-  Future<bool> signUp(String email, String password) async {
-    _setLoading(true);
-    try {
-      await _authService.signUp(email, password);
-      _setLoading(false);
-      return true; // Signup successful
-    } catch (e) {
-      _errorMessage = e.toString();
-      _setLoading(false);
-      notifyListeners();
-      return false; // Signup failed
-    }
-  }
-
   /// Login method
   Future<bool> login(String email, String password) async {
-    _setLoading(true);
+    _startLoading();
     try {
-      await _authService.signIn(email, password);
-      _setLoading(false);
-      return true; // Login successful
+      clearError(); // Reset error state before operation
+      final user = await _authService.signIn(email, password);
+      return user != null;
     } catch (e) {
-      _errorMessage = e.toString();
-      _setLoading(false);
-      notifyListeners();
-      return false; // Login failed
+      _setError(e.toString());
+      return false;
+    } finally {
+      _stopLoading();
     }
   }
 
-  /// Reset state
+  /// Signup method with user details
+  Future<bool> signUp(String name, String email, String password, String preferences) async {
+    _startLoading();
+    try {
+      clearError(); // Reset error state before operation
+
+      // Convert preferences to a map if it's a string
+      Map<String, dynamic> preferencesMap = {'preferences': preferences};
+
+      final user = await _authService.signUp(email, password, name, preferencesMap);
+      return user != null;
+    } catch (e) {
+      _setError(e.toString());
+      return false;
+    } finally {
+      _stopLoading();
+    }
+  }
+
+  /// Logout method
+  Future<void> logout() async {
+    try {
+      await _authService.signOut();
+    } catch (e) {
+      _setError(e.toString());
+    }
+  }
+
+  /// Reset the error message
   void clearError() {
     _errorMessage = null;
     notifyListeners();
   }
 
-  /// Private helper for loading state
-  void _setLoading(bool value) {
-    _isLoading = value;
+  /// Set error message
+  void _setError(String error) {
+    _errorMessage = error;
+    notifyListeners();
+  }
+
+  /// Set loading state to true
+  void _startLoading() {
+    _isLoading = true;
+    notifyListeners();
+  }
+
+  /// Set loading state to false
+  void _stopLoading() {
+    _isLoading = false;
     notifyListeners();
   }
 }

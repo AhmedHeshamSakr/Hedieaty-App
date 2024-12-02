@@ -12,4 +12,6 @@ abstract class EventRepository {
 
   /// Deletes an event by its ID.
   Future<void> deleteEvent(int eventId);
+
+  Future<List<EventModel>> getEventsByStatus(String status);
 }

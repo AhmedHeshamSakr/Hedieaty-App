@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class GiftModel {
   final int id;
   final String name;
@@ -6,6 +8,7 @@ class GiftModel {
   final double price;
   final String status;
   final int eventId;
+  final Text pledgedByUserId;
 
   GiftModel({
     required this.id,
@@ -15,6 +18,7 @@ class GiftModel {
     required this.price,
     required this.status,
     required this.eventId,
+    required this.pledgedByUserId,
   });
 
   Map<String, dynamic> toMap() {
@@ -26,6 +30,7 @@ class GiftModel {
       'price': price,
       'status': status,
       'eventId': eventId,
+      'pledgedByUserId': pledgedByUserId,
     };
   }
 
@@ -38,6 +43,28 @@ class GiftModel {
       price: map['price'],
       status: map['status'],
       eventId: map['eventId'],
+      pledgedByUserId:map['pledgedByUserId'],
+    );
+  }
+
+  GiftModel copyWith({
+    int? id,
+    String? name,
+    String? description,
+    String? category,
+    String? status,
+    double? price,
+    int? eventId,
+  }) {
+    return GiftModel(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      description: description ?? this.description,
+      category: category ?? this.category,
+      status: status ?? this.status,
+      price: price ?? this.price,
+      eventId: eventId ?? this.eventId,
+      pledgedByUserId: pledgedByUserId,
     );
   }
 }

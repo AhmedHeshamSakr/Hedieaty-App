@@ -5,4 +5,5 @@ class RouteNames {
   static const String eventList = '/eventList';
   static const String giftList = '/giftList';
   static const String profile = '/profile';
+  static const String addFriend = '/addFriend';
 }

@@ -1,12 +1,16 @@
-import '../../data/local/models/friend_model.dart';
 import '../repositories/friend_repository.dart';
+import '../../data/local/models/friend_model.dart';
 
 class GetFriendsUseCase {
-  final FriendRepository repository;
+  final FriendRepository friendRepository;
 
-  GetFriendsUseCase(this.repository);
+  GetFriendsUseCase(this.friendRepository);
 
-  Future<List<FriendModel>> call() async {
-    return await repository.getAllFriends();
+  Future<List<FriendModel>> execute() async {
+    try {
+      return await friendRepository.getAllFriends();
+    } catch (e) {
+      throw Exception('Error fetching friends: ${e.toString()}');
+    }
   }
 }

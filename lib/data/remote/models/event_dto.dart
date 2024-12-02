@@ -1,5 +1,5 @@
 class EventDTO {
-  String id;
+  String? id; // Firestore document ID
   String name;
   String date;
   String location;
@@ -7,7 +7,7 @@ class EventDTO {
   String userId;
 
   EventDTO({
-    required this.id,
+    this.id,
     required this.name,
     required this.date,
     required this.location,
@@ -15,7 +15,7 @@ class EventDTO {
     required this.userId,
   });
 
-  // Convert from Event model to DTO (for uploading to Firebase)
+  // Convert from Event model to DTO (for uploading to Firestore)
   Map<String, dynamic> toMap() {
     return {
       'name': name,
@@ -26,10 +26,10 @@ class EventDTO {
     };
   }
 
-  // Convert from Firebase data to DTO (for reading from Firebase)
-  factory EventDTO.fromMap(Map<String, dynamic> map) {
+  // Convert from Firestore data to DTO (for reading from Firestore)
+  factory EventDTO.fromMap(Map<String, dynamic> map, String id) {
     return EventDTO(
-      id: map['id'],
+      id: id,
       name: map['name'],
       date: map['date'],
       location: map['location'],

@@ -1,1 +1,53 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"hedieaty-app","appId":"1:43141891785:android:7e33404eb54178c4a42f18","fileOutput":"android/app/google-services.json"}},"ios":{"default":{"projectId":"hedieaty-app","appId":"1:43141891785:ios:8a43b124098d33cfa42f18","uploadDebugSymbols":false,"fileOutput":"ios/Runner/GoogleService-Info.plist"}},"macos":{"default":{"projectId":"hedieaty-app","appId":"1:43141891785:ios:8a43b124098d33cfa42f18","uploadDebugSymbols":false,"fileOutput":"macos/Runner/GoogleService-Info.plist"}},"dart":{"lib/firebase_options.dart":{"projectId":"hedieaty-app","configurations":{"android":"1:43141891785:android:7e33404eb54178c4a42f18","ios":"1:43141891785:ios:8a43b124098d33cfa42f18"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "hedieaty-app",
+          "appId": "1:43141891785:android:7e33404eb54178c4a42f18",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "hedieaty-app",
+          "appId": "1:43141891785:ios:8a43b124098d33cfa42f18",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "macos": {
+        "default": {
+          "projectId": "hedieaty-app",
+          "appId": "1:43141891785:ios:8a43b124098d33cfa42f18",
+          "uploadDebugSymbols": false,
+          "fileOutput": "macos/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "hedieaty-app",
+          "configurations": {
+            "android": "1:43141891785:android:7e33404eb54178c4a42f18",
+            "ios": "1:43141891785:ios:8a43b124098d33cfa42f18"
+          }
+        }
+      }
+    }
+  },
+  "emulators": {
+    "singleProjectMode": true,
+    "auth": {
+      "port": 9099
+    },
+    "firestore": {
+      "port": 8080
+    },
+    "database": {
+      "port": 9000
+    },
+    "ui": {
+      "enabled": true
+    }
+  }
+}

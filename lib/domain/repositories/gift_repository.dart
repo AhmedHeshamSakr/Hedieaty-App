@@ -17,5 +17,7 @@ abstract class GiftRepository {
   /// Deletes a gift from the repository using its ID.
   Future<void> deleteGift(int giftId);
 
-  getGiftById(int giftId) {}
+  Future<GiftModel?> getGiftById(int giftId);
+
+  Future<void> pledgeGift(int giftId, int userId);
 }

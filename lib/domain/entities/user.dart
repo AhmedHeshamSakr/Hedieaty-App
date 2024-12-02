@@ -1,27 +1,28 @@
-import 'event.dart';
-import 'gift.dart';
-
 class User {
   final String id;
   final String name;
   final String email;
-  final String profilePicture;
-  final List<Event> createdEvents;
-  final List<Gift> pledgedGifts;
+  final String preferences; // Could be a more structured object if needed
 
   User({
     required this.id,
     required this.name,
     required this.email,
-    required this.profilePicture,
-    required this.createdEvents,
-    required this.pledgedGifts,
+    required this.preferences,
   });
-}
 
-//
-// /// Domain-specific method to display a fallback name
-//   String getDisplayName() {
-//     return name.isNotEmpty ? name : email.split('@').first;
-//   }
-// }
+  // Equality and hashCode
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is User &&
+              runtimeType == other.runtimeType &&
+              id == other.id &&
+              name == other.name &&
+              email == other.email &&
+              preferences == other.preferences;
+
+  @override
+  int get hashCode =>
+      id.hashCode ^ name.hashCode ^ email.hashCode ^ preferences.hashCode;
+}

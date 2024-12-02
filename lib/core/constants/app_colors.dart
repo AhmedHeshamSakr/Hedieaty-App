@@ -20,4 +20,25 @@ class AppColors {
   // Error colors
   static const Color error = Color(0xFFB00020); // Red
   static const Color onError = Color(0xFFFFFFFF);
+
+  // Additional states
+  static const Color disabled = Color(0xFFBDBDBD); // Light gray for disabled elements
+  static const Color focused = Color(0xFF6200EE); // Same as primary
+  static const Color hint = Color(0xFF757575); // Gray for hint text or icons
+  static const Color overlay = Color(0x99000000); // Semi-transparent black for overlays
+  static const Color divider = Color(0xFFE0E0E0); // Divider color
+
+  // Transparency variants
+  static const Color onSurfaceDisabled = Color(0x61000000); // 38% opacity black
+  static const Color onPrimaryDisabled = Color(0x61FFFFFF); // 38% opacity white
+
+  // Dark mode colors (optional)
+  static const Color darkBackground = Color(0xFF121212);
+  static const Color darkSurface = Color(0xFF1E1E1E);
+  static const Color darkOnBackground = Color(0xFFE0E0E0);
+  static const Color darkOnSurface = Color(0xFFE0E0E0);
+
+  // Semantic additions for dark mode
+  static const Color darkHint = Color(0x80FFFFFF); // Hint text in dark mode
+  static const Color darkDisabled = Color(0x62FFFFFF); // Disabled elements in dark mode
 }

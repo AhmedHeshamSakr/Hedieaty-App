@@ -1,98 +1,87 @@
 import 'package:flutter/material.dart';
-import 'package:hedieaty/presentation/pages/home/home_controller.dart';
-import 'package:hedieaty/core/constants/app_colors.dart';
-import 'package:hedieaty/core/constants/app_styles.dart';
-import 'package:hedieaty/presentation/widgets/friend_list_tile.dart';
+import 'package:provider/provider.dart';
+import '../../widgets/custom_input_field.dart'; // Custom search input
+import '../../widgets/friend_list_tile.dart'; // Friend list tile
+import 'home_controller.dart'; // Your HomePageController
 
 class HomePage extends StatelessWidget {
-  final HomeController controller;
+  final String userName;
 
-  const HomePage({super.key, required this.controller});
+  const HomePage({super.key, required this.userName});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              "Welcome, ${controller.userName}",
-              style: AppStyles.appBarTextStyle,
-            ),
-            IconButton(
-              icon: const Icon(Icons.logout, color: Colors.white),
-              onPressed: controller.logout,
-            ),
-          ],
-        ),
-        backgroundColor: AppColors.primary,
-        elevation: 5.0,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
-        ),
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size(double.infinity, 50),
-                backgroundColor: AppColors.primary,
-              ),
-              onPressed: controller.createEvent,
-              child: const Text("Create Your Own Event/List"),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: TextField(
-              focusNode: controller.searchFocusNode,
-              decoration: InputDecoration(
-                labelText: "Search Friends",
-                prefixIcon: const Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
+    return ChangeNotifierProvider(
+      create: (_) => HomePageController(),
+      child: Consumer<HomePageController>(
+        builder: (context, controller, _) {
+          final FocusNode searchFocusNode = FocusNode();
+
+          return Scaffold(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              title: Text(
+                "Welcome, $userName",
+                style: Theme.of(context).appBarTheme.titleTextStyle?.copyWith(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              onChanged: controller.searchFriends,
+              actions: [
+                IconButton(
+                  icon: const Icon(Icons.logout),
+                  tooltip: "Logout",
+                  onPressed: () => controller.logout(context),
+                ),
+              ],
             ),
-          ),
-          const SizedBox(height: 16),
-          Expanded(
-            child: FutureBuilder<List<Friend>>(
-              future: controller.getFriends(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError) {
-                  return Center(child: Text("Error: ${snapshot.error}"));
-                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return const Center(child: Text("No friends found."));
-                }
-
-                final friends = snapshot.data!;
-                return ListView.builder(
-                  itemCount: friends.length,
-                  itemBuilder: (context, index) {
-                    final friend = friends[index];
-                    return FriendListTile(
-                      friend: friend,
-                      onTap: () => controller.openFriendGifts(friend),
-                    );
-                  },
+            body: GestureDetector(
+              onTap: () => controller.unfocusSearch(searchFocusNode),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        // Add functionality for creating an event/list
+                      },
+                      child: const Text("Create Your Own Event/List"),
+                    ),
+                    const SizedBox(height: 16),
+                    CustomInputField(
+                      hintText: "Search Friends",
+                      focusNode: searchFocusNode,
+                    ),
+                    const SizedBox(height: 16),
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: 3, // Example length
+                        itemBuilder: (context, index) => FriendListTile(
+                          friendName: 'Friend $index',
+                          profilePic: Icons.person,
+                          upcomingEvents: index, // Example data
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            bottomNavigationBar: BottomNavigationBar(
+              currentIndex: controller.selectedIndex,  // Reflects the updated selected index
+              onTap: (index) => controller.onItemTapped(index, context),  // Update index and navigate
+              selectedItemColor: Theme.of(context).colorScheme.primary,
+              unselectedItemColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+              showUnselectedLabels: true,
+              items: List.generate(controller.navItems.length, (index) {
+                return BottomNavigationBarItem(
+                  icon: Icon(controller.navItems[index]['icon']),
+                  label: controller.navItems[index]['route'],
                 );
-              },
+              }),
             ),
-          ),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: controller.bottomNavigationItems,
-        currentIndex: controller.selectedIndex,
-        onTap: controller.onNavigationItemTapped,
+          );
+        },
       ),
     );
   }

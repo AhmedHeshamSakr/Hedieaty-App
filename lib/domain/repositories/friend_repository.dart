@@ -10,4 +10,6 @@ abstract class FriendRepository {
 
   /// Removes a friend by their ID.
   Future<void> removeFriend(int friendId);
+
+  Future<bool> hasUpcomingEvents(int friendId);
 }

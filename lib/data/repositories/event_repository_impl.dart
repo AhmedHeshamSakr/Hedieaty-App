@@ -26,4 +26,23 @@ class EventRepositoryImpl implements EventRepository {
   Future<void> deleteEvent(int eventId) async {
     await localDatasource.deleteEvent(eventId);
   }
+
+  /// New functionality: Filter events by status (Upcoming/Current/Past)
+  @override
+  Future<List<EventModel>> getEventsByStatus(String status) async {
+    final allEvents = await getAllEvents();
+    final now = DateTime.now();
+
+    if (status == 'Upcoming') {
+      return allEvents.where((event) => event.date.isAfter(now)).toList();
+    } else if (status == 'Current') {
+      return allEvents.where((event) =>
+      event.date.isAtSameMomentAs(now) ||
+          (event.date.isBefore(now) && event.date.add(Duration(hours: 24)).isAfter(now))).toList();
+    } else if (status == 'Past') {
+      return allEvents.where((event) => event.date.isBefore(now)).toList();
+    } else {
+      throw Exception('Invalid status provided');
+    }
+  }
 }

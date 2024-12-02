@@ -2,7 +2,7 @@ import '../../domain/repositories/gift_repository.dart';
 import '../local/datasources/sqlite_gift_datasource.dart';
 import '../local/models/gift_model.dart';
 
-class GiftRepositoryImpl implements GiftRepository{
+class GiftRepositoryImpl implements GiftRepository {
   final SqliteGiftDatasource localDatasource;
 
   GiftRepositoryImpl(this.localDatasource);
@@ -28,8 +28,23 @@ class GiftRepositoryImpl implements GiftRepository{
   }
 
   @override
-  getGiftById(int giftId) {
-    // TODO: implement getGiftById
-    throw UnimplementedError();
+  Future<GiftModel?> getGiftById(int giftId) async {
+    try {
+      final gifts = await localDatasource.getGiftsByEventId(giftId);
+      for (var gift in gifts) {
+        if (gift.id == giftId) {
+          return gift;
+        }
+      }
+      return null; // Return null if no match is found
+    } catch (e) {
+      throw Exception('Error fetching gift by ID: ${e.toString()}');
+    }
+  }
+
+  /// New functionality: Pledge a gift
+  @override
+  Future<void> pledgeGift(int giftId, int userId) async {
+    await localDatasource.pledgeGift(giftId, userId);
   }
 }

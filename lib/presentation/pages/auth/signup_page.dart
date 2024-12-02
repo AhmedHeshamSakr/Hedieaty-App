@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import '../auth//auth_controller.dart';
+import '../auth/auth_controller.dart';
 import 'package:provider/provider.dart';
+import 'package:hedieaty/core/utils/validators.dart';
 
 class SignupPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _preferencesController = TextEditingController();
 
   SignupPage({super.key});
 
@@ -15,6 +18,7 @@ class SignupPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text('Signup'),
       ),
       body: Padding(
@@ -25,30 +29,33 @@ class SignupPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               TextFormField(
-                controller: _emailController,
-                decoration: const InputDecoration(labelText: 'Email'),
-                keyboardType: TextInputType.emailAddress,
+                controller: _nameController,
+                decoration: const InputDecoration(labelText: 'Name'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter your email';
-                  }
-                  final emailRegex = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
-                  if (!emailRegex.hasMatch(value)) {
-                    return 'Please enter a valid email address';
+                    return 'Please enter your name';
                   }
                   return null;
                 },
               ),
               TextFormField(
+                controller: _emailController,
+                decoration: const InputDecoration(labelText: 'Email'),
+                keyboardType: TextInputType.emailAddress,
+                validator: Validators.validateEmail,
+              ),
+              TextFormField(
                 controller: _passwordController,
                 decoration: const InputDecoration(labelText: 'Password'),
                 obscureText: true,
+                validator: Validators.validatePassword,
+              ),
+              TextFormField(
+                controller: _preferencesController,
+                decoration: const InputDecoration(labelText: 'Preferences'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter your password';
-                  }
-                  if (value.length < 6) {
-                    return 'Password must be at least 6 characters long';
+                    return 'Please enter your preferences';
                   }
                   return null;
                 },
@@ -61,8 +68,10 @@ class SignupPage extends StatelessWidget {
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       final success = await authController.signUp(
+                        _nameController.text.trim(),
                         _emailController.text.trim(),
                         _passwordController.text.trim(),
+                        _preferencesController.text.trim(),
                       );
                       if (success) {
                         ScaffoldMessenger.of(context).showSnackBar(

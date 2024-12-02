@@ -1,62 +1,51 @@
 import 'package:flutter/material.dart';
-import 'package:hedieaty/domain/entities/friend.dart';
-import 'package:hedieaty/domain/repositories/friend_repository.dart';
-import 'package:hedieaty/presentation/routes/navigation_service.dart';
-import 'package:hedieaty/presentation/routes/route_names.dart';
+import '../../routes/navigation_service.dart';
+import '../../routes/route_names.dart'; // Your route names
 
-class HomeController {
-  final FriendRepository friendRepository;
-  final FocusNode searchFocusNode = FocusNode();
-  final List<BottomNavigationBarItem> bottomNavigationItems;
-  final NavigationService navigationService;
+class HomePageController extends ChangeNotifier {
+  int _selectedIndex = 0;
 
-  String userName = "User";
-  int selectedIndex = 0;
-
-  HomeController({
-    required this.friendRepository,
-    required this.navigationService,
-  }) : bottomNavigationItems = [
-    const BottomNavigationBarItem(icon: Icon(Icons.event), label: 'Events'),
-    const BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-    const BottomNavigationBarItem(icon: Icon(Icons.card_giftcard), label: 'Gifts'),
-    const BottomNavigationBarItem(icon: Icon(Icons.contact_phone), label: 'Add Friend'),
+  // The list of routes and icons corresponding to each bottom navigation item
+  final List<Map<String, dynamic>> _navItems = [
+    {'icon': Icons.event, 'route': RouteNames.eventList},
+    {'icon': Icons.person, 'route': RouteNames.profile},
+    {'icon': Icons.card_giftcard, 'route': RouteNames.giftList},
+    {'icon': Icons.contact_phone, 'route': RouteNames.addFriend},
   ];
 
-  Future<List<Friend>> getFriends() async {
-    return await friendRepository.getAllFriends();
+  int get selectedIndex => _selectedIndex;
+  List<Map<String, dynamic>> get navItems => _navItems;
+
+  // Method to handle navigation and updating the selected tab
+  void onItemTapped(int index, BuildContext context) {
+    if (_selectedIndex == index) return; // Prevent unnecessary navigation
+
+    _selectedIndex = index; // Update selected index immediately
+    notifyListeners(); // Notify listeners so UI can rebuild with the new selected index
+
+    final route = _navItems[index]['route'];
+
+    // Navigate to the selected route using NavigationService
+    NavigationService().navigateTo(route).then((_) {
+      // Optionally reset the index to home (0) when returning to the home page
+      if (route == RouteNames.home) {
+        _selectedIndex = 0; // Reset to home tab when navigating back to home page
+        notifyListeners();
+      }
+    });
   }
 
-  void onNavigationItemTapped(int index) {
-    selectedIndex = index;
-    final routes = [
-      RouteNames.eventList,
-      RouteNames.profile,
-      RouteNames.giftList,
-      RouteNames.addFriend
-    ];
-    if (index < routes.length) {
-      navigationService.navigateTo(routes[index]);
+  void logout(BuildContext context) {
+    _selectedIndex = 0; // Reset to home tab on logout
+    notifyListeners();
+
+    // Navigate to login screen and clear navigation stack
+    NavigationService().navigateAndClear(RouteNames.login);
+  }
+
+  void unfocusSearch(FocusNode searchFocusNode) {
+    if (searchFocusNode.hasFocus) {
+      searchFocusNode.unfocus();
     }
-  }
-
-  void logout() {
-    navigationService.replaceWith(RouteNames.login);
-  }
-
-  void createEvent() {
-    navigationService.navigateTo(RouteNames.createEvent);
-  }
-
-  void searchFriends(String query) {
-    // Handle friend search logic
-  }
-
-  void openFriendGifts(Friend friend) {
-    navigationService.navigateTo(RouteNames.friendGiftList, arguments: friend);
-  }
-
-  void dispose() {
-    searchFocusNode.dispose();
   }
 }
