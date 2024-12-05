@@ -12,15 +12,18 @@ class UserRepositoryImpl implements UserRepository {
   UserRepositoryImpl(this.localDatasource, this.remoteAuthService);
 
   /// Fetch a user's profile from local SQLite or Firebase
+  ///
+  ///
+
   @override
-  Future<UserModel?> getUserProfile(String userId) async {
+  Future<UserModel?> getUserProfile(int userId) async {
     try {
       // Attempt to fetch the user from the local database
-      final localUser = await localDatasource.getUserById(userId);
+      final localUser = await localDatasource.getUserById(userId as String);
       if (localUser != null) return localUser;
 
       // Fetch from Firebase if not found locally
-      final remoteUser = await remoteAuthService.getUserById(userId);
+      final remoteUser = await remoteAuthService.getUserById(userId as String);
       if (remoteUser != null) {
         // Save the fetched user to the local database for future use
         await localDatasource.insertUser(remoteUser);

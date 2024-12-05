@@ -1,10 +1,12 @@
+import '../../local/models/event_model.dart';
+
 class EventDTO {
-  String? id; // Firestore document ID
+  String? id; // Firebase's auto-generated ID
   String name;
-  String date;
+  DateTime date;
   String location;
   String description;
-  String userId;
+  String status; // Added status field
 
   EventDTO({
     this.id,
@@ -12,29 +14,52 @@ class EventDTO {
     required this.date,
     required this.location,
     required this.description,
-    required this.userId,
+    required this.status, // Added status in constructor
   });
 
-  // Convert from Event model to DTO (for uploading to Firestore)
+  factory EventDTO.fromMap(Map<dynamic, dynamic> map) {
+    return EventDTO(
+      id: map['id'] as String?,
+      name: map['name'] as String,
+      date: DateTime.parse(map['date'] as String),
+      location: map['location'] as String,
+      description: map['description'] as String,
+      status: map['status'] as String, // Parse status from map
+    );
+  }
+
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'name': name,
-      'date': date,
+      'date': date.toIso8601String(),
       'location': location,
       'description': description,
-      'userId': userId,
+      'status': status, // Include status in map
     };
   }
 
-  // Convert from Firestore data to DTO (for reading from Firestore)
-  factory EventDTO.fromMap(Map<String, dynamic> map, String id) {
+  /// Converts an `EventModel` to an `EventDTO`.
+  static EventDTO fromEventModel(EventModel model) {
     return EventDTO(
-      id: id,
-      name: map['name'],
-      date: map['date'],
-      location: map['location'],
-      description: map['description'],
-      userId: map['userId'],
+      id: model.id?.toString(),
+      name: model.name,
+      date: model.date,
+      location: model.location,
+      description: model.description,
+      status: model.status, // Set status from EventModel
+    );
+  }
+
+  /// Converts an `EventDTO` to an `EventModel`.
+  EventModel toEventModel() {
+    return EventModel(
+      id: int.tryParse(id ?? ''),
+      name: name,
+      date: date,
+      location: location,
+      description: description,
+      status: status, // Set status in EventModel
     );
   }
 }

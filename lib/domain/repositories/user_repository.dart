@@ -1,10 +1,10 @@
 import '../../data/local/models/event_model.dart';
 import '../../data/local/models/gift_model.dart';
-import '/data/local/models/user_model.dart';
+import '../../data/local/models/user_model.dart';
 
 abstract class UserRepository {
   /// Fetches a user profile by ID.
-  Future<UserModel?> getUserProfile(String userId);
+  Future<UserModel?> getUserProfile(int userId);
 
   /// Updates a user profile.
   Future<void> updateUserProfile(UserModel user);
@@ -15,9 +15,12 @@ abstract class UserRepository {
   /// Signs out the current user.
   Future<void> signOut();
 
+  /// Fetches events created by the user.
   Future<List<EventModel>> getUserCreatedEvents(int userId);
 
+  /// Fetches gifts pledged by the user.
   Future<List<GiftModel>> getUserPledgedGifts(int userId);
 
+  /// Pledges a gift by the user.
   Future<void> pledgeGift(int giftId, int userId);
 }

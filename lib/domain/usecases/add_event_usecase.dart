@@ -1,16 +1,13 @@
+import '../entities/event.dart';
 import '../repositories/event_repository.dart';
-import '../../data/local/models/event_model.dart';
 
 class AddEventUseCase {
-  final EventRepository eventRepository;
+  final EventRepository repository;
 
-  AddEventUseCase(this.eventRepository);
+  AddEventUseCase({required this.repository});
 
-  Future<void> execute(EventModel event) async {
-    try {
-      await eventRepository.createEvent(event);
-    } catch (e) {
-      throw Exception('Error adding event: ${e.toString()}');
-    }
+  Future<void> execute(Event event) async {
+    // Additional domain logic or validation can go here, if needed
+    await repository.createEvent(event);
   }
 }

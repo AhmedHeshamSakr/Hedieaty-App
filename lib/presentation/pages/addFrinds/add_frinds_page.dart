@@ -147,7 +147,7 @@ class _AddFriendsPageState extends State<AddFriendsPage> {
       builder: (context) {
         return AlertDialog(
           title: const Text("Select a Contact"),
-          content: Container(
+          content: SizedBox(
             width: double.maxFinite,
             child: ListView.builder(
               itemCount: contacts.length,

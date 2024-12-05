@@ -28,17 +28,22 @@ class DatabaseHelper {
     // Open the database
     return openDatabase(
       path,
-      version: 1,
+      version: 2, // Increment the version to reflect schema changes
       onConfigure: (db) async {
-        await db.execute('PRAGMA foreign_keys = ON');
+        await db.execute('PRAGMA foreign_keys = ON'); // Enable foreign key constraints
       },
-      onCreate: (db, version) => _createTables(db),
+      onCreate: (db, version) async {
+        await createTables(db); // Create tables for the first time
+      },
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < 2) {
-          // Example schema update
+          // Apply schema updates for version 2
+          await createTables(db);
         }
+        // Add further conditions here for future schema changes
       },
     );
+
   }
 
   Future<String> _getDatabasePath() async {
@@ -49,56 +54,49 @@ class DatabaseHelper {
     }
   }
 
-  Future<void> _createTables(Database db) async {
-    // Creating tables
+  Future<void> createTables(Database db) async {
     await db.execute('''
-      CREATE TABLE users_new (
+    CREATE TABLE users (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      firebase_uid TEXT NOT NULL,
-      name TEXT,
-      email TEXT,
+      name TEXT NOT NULL,
+      email TEXT UNIQUE NOT NULL,
       preferences TEXT
     );
-    INSERT INTO users_new (id, firebase_uid, name, email, preferences)
-    SELECT id, NULL, name, email, preferences FROM users;
-    DROP TABLE users;
-    ALTER TABLE users_new RENAME TO users;
-
-    ''');
+  ''');
 
     await db.execute('''
-      CREATE TABLE events(
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT,
-        date TEXT,
-        location TEXT,
-        description TEXT,
-        userId INTEGER,
-        FOREIGN KEY (userId) REFERENCES users(id)
-      );
-    ''');
+    CREATE TABLE events (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL,
+      date TEXT NOT NULL,
+      location TEXT,
+      description TEXT,
+      userId INTEGER NOT NULL,
+      FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE
+    );
+  ''');
 
     await db.execute('''
-      CREATE TABLE gifts(
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT,
-        description TEXT,
-        category TEXT,
-        price REAL,
-        status TEXT,
-        eventId INTEGER,
-        FOREIGN KEY (eventId) REFERENCES events(id)
-      );
-    ''');
+    CREATE TABLE gifts (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL,
+      description TEXT,
+      category TEXT,
+      price REAL,
+      status TEXT,
+      eventId INTEGER NOT NULL,
+      FOREIGN KEY (eventId) REFERENCES events(id) ON DELETE CASCADE
+    );
+  ''');
 
     await db.execute('''
-      CREATE TABLE friends(
-        userId INTEGER,
-        friendId INTEGER,
-        PRIMARY KEY (userId, friendId),
-        FOREIGN KEY (userId) REFERENCES users(id),
-        FOREIGN KEY (friendId) REFERENCES users(id)
-      );
-    ''');
+    CREATE TABLE friends (
+      userId INTEGER NOT NULL,
+      friendId INTEGER NOT NULL,
+      PRIMARY KEY (userId, friendId),
+      FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE,
+      FOREIGN KEY (friendId) REFERENCES users(id) ON DELETE CASCADE
+    );
+  ''');
   }
 }

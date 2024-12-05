@@ -1,16 +1,15 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 import '../models/friend_dto.dart';
 
-class FirestoreFriendDataSource {
-  final CollectionReference _friendsCollection = FirebaseFirestore.instance.collection('friends');
-
+class FirebaseFriendDataSource {
+  final DatabaseReference _database = FirebaseDatabase.instance.ref();
   Future<void> addFriend(FriendDTO friendDTO) async {
-    final docId = "${friendDTO.userId}_${friendDTO.friendId}"; // Unique identifier for friendship
-    await _friendsCollection.doc(docId).set(friendDTO.toMap());
+    final friendsRef = _database.child('friends').child(friendDTO.userId).child(friendDTO.friendId);
+    await friendsRef.set(true);  // True indicates friendship
   }
-
   Future<List<String>> getFriends(String userId) async {
-    final querySnapshot = await _friendsCollection.where('userId', isEqualTo: userId).get();
-    return querySnapshot.docs.map((doc) => (doc.data() as Map<String, dynamic>)['friendId'] as String).toList();
+    final snapshot = await _database.child('friends').child(userId).once();
+    final friendsMap = snapshot.snapshot.value as Map<dynamic, dynamic>;
+    return friendsMap.keys.map((key) => key.toString()).toList();
   }
 }
