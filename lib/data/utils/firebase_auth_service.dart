@@ -3,7 +3,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'dart:convert';
 
 import '../local/datasources/sqlite_user_datasource.dart';
-import '../local/models/user_model.dart';
+import '../models/user_model.dart';
 
 class FirebaseAuthService {
   final FirebaseAuth _firebaseAuth;

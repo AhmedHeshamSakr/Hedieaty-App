@@ -1,5 +1,5 @@
 
-import '../../data/local/models/gift_model.dart';
+import '../../data/models/gift_model.dart';
 
 /// This interface defines the contract for gift-related operations.
 /// The implementation of this repository (e.g., GiftRepositoryImpl)

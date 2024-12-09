@@ -15,6 +15,7 @@ import 'data/local/database_helper.dart';
 import 'data/local/database_reset.dart';
 import 'data/remote/realtime_database_helper.dart';
 import 'data/utils/firebase_auth_service.dart'; // Firebase auth service
+import 'domain/repositories/event_repository.dart';
 import 'presentation/pages/auth/auth_controller.dart'; // Authentication controller
 import 'presentation/pages/events/event_controller.dart'; // Event list controller
 import 'presentation/routes/app_router.dart'; // Route management
@@ -23,7 +24,7 @@ import 'presentation/routes/route_names.dart'; // Route names
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // await DatabaseResetUtility.dropDatabase();
+  await DatabaseResetUtility.dropDatabase();
 
   // Initialize Firebase with comprehensive error handling and logging
   await _initializeFirebase();
@@ -41,7 +42,7 @@ Future<void> main() async {
           create: (_) => AuthController(serviceLocator<FirebaseAuthService>())
         ),
         ChangeNotifierProvider<EventListController>(
-          create: (_) => EventListController()
+            create: (_) => EventListController(serviceLocator<EventRepository>())
         ),
         ChangeNotifierProvider<HomePageController>(
           create: (_) => HomePageController()

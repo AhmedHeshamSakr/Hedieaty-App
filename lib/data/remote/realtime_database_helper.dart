@@ -1,83 +1,111 @@
 import 'package:firebase_database/firebase_database.dart';
-import 'models/event_dto.dart';
-import 'models/friend_dto.dart';
-import 'models/gift_dto.dart';
-import 'models/user_dto.dart'; // Import your DTO classes
+import '../models/event_model.dart';
+import '../models/friend_model.dart';
+import '../models/gift_model.dart';
+import '../models/user_model.dart';
+import 'datasources/firebase_event_datasource.dart';
+import 'datasources/firebase_friend_datasource.dart';
+import 'datasources/firebase_gift_datasource.dart';
+import 'datasources/firebase_user_datasource.dart';
 
 class RealTimeDatabaseHelper {
-  // Singleton pattern for database helper
+  // Singleton pattern
   static final RealTimeDatabaseHelper instance = RealTimeDatabaseHelper._init();
-  // factory DatabaseHelper() => _instance;
-  // DatabaseHelper._internal();
 
-  // Firebase Realtime Database reference
+  // Firebase Database reference
   final DatabaseReference _database = FirebaseDatabase.instance.ref();
 
-  RealTimeDatabaseHelper._init();
+  // Instances of data sources
+  final EventRemoteDataSource eventDataSource;
+  final FriendRemoteDataSource friendDataSource;
+  final GiftRemoteDataSource giftDataSource;
+  final UserRemoteDataSource userDataSource;
 
-  // Events Collection Methods
-  Future<void> createEvent(EventDTO event) async {
-    try {
-      // Generate a unique ID if not provided
-      final eventRef = _database.child('events').push();
-      event.id = eventRef.key!;
+  RealTimeDatabaseHelper._init()
+      : eventDataSource = EventRemoteDataSource(),
+        friendDataSource = FriendRemoteDataSource(),
+        giftDataSource = GiftRemoteDataSource(),
+        userDataSource = UserRemoteDataSource();
 
-      await eventRef.set(event.toMap());
-    } catch (e) {
-      print('Error creating event: $e');
-      rethrow;
-    }
+  // Example of a method using data sources
+  Future<void> createEvent(EventModel event) async {
+    await eventDataSource.createEvent(event);
   }
 
-  Future<List<EventDTO>> fetchEvents() async {
-    try {
-      final snapshot = await _database.child('events').once();
-
-      if (snapshot.snapshot.value != null) {
-        Map<dynamic, dynamic> eventsMap = snapshot.snapshot.value as Map<dynamic, dynamic>;
-        return eventsMap.entries.map((entry) {
-          var eventData = Map<String, dynamic>.from(entry.value);
-          eventData['id'] = entry.key;
-          return EventDTO.fromMap(eventData);
-        }).toList();
-      }
-      return [];
-    } catch (e) {
-      print('Error fetching events: $e');
-      return [];
-    }
+  Future<EventModel?> getEventById(String id) async {
+    return await eventDataSource.getEventById(id);
   }
 
-  // Similar methods for other DTOs (Friends, Gifts, Users)
-  Future<void> createFriend(FriendDTO friend) async {
-    try {
-      await _database.child('friends').push().set(friend.toMap());
-    } catch (e) {
-      print('Error creating friend connection: $e');
-      rethrow;
-    }
+  Future<List<EventModel>> fetchAllEvents() async {
+    return await eventDataSource.fetchAllEvents();
   }
 
-  Future<void> createGift(GiftDTO gift) async {
-    try {
-      final giftRef = _database.child('gifts').push();
-      gift.id = giftRef.key!;
-
-      await giftRef.set(gift.toMap());
-    } catch (e) {
-      print('Error creating gift: $e');
-      rethrow;
-    }
+  Future<void> updateEvent(String id, EventModel event) async {
+    await eventDataSource.updateEvent(id, event);
   }
 
-  Future<void> createUser(UserDTO user) async {
-    try {
-      await _database.child('users').child(user.id as String).set(user.toMap());
-    } catch (e) {
-      print('Error creating user: $e');
-      rethrow;
-    }
+  Future<void> deleteEvent(String id) async {
+    await eventDataSource.deleteEvent(id);
+  }
+/////////////////////////////////////////////////////////////////
+
+  Future<void> createFriend(FriendModel friend) async {
+     await friendDataSource.createFriend(friend);
   }
 
-// Add methods for updating and deleting records
+  Future<List<FriendModel>> fetchAllFriends(String userId) async {
+    return await friendDataSource.fetchAllFriends(userId);
+  }
+
+  Future<FriendModel?> getFriendById(String userId, String friendId) async {
+   return await friendDataSource.getFriendById(userId, friendId);
+  }
+
+  Future<void> deleteFriend(String userId, String friendId) async {
+    await friendDataSource.deleteFriend(userId, friendId);
+
+  }
+
+/////////////////////////////////////////////////////////////////
+  Future<void> createGift(GiftModel gift) async {
+    await giftDataSource.createGift(gift);
+  }
+
+  Future<GiftModel?> getGiftById(String id) async {
+    return await giftDataSource.getGiftById(id);
+  }
+
+  Future<List<GiftModel>> fetchAllGifts() async {
+    return await giftDataSource.fetchAllGifts();
+  }
+
+  Future<void> updateGift(String id, GiftModel gift) async {
+    await giftDataSource.updateGift(id, gift);
+  }
+
+  Future<void> deleteGift(String id) async {
+    await giftDataSource.deleteGift(id);
+  }
+
+/////////////////////////////////////////////////////////////////
+  Future<void> createUser(UserModel user) async {
+    await userDataSource.createUser(user);
+  }
+
+  Future<UserModel?> getUserById(String id) async {
+    return await userDataSource.getUserById(id);
+  }
+
+  Future<List<UserModel>> fetchAllUsers() async {
+    return await userDataSource.fetchAllUsers();
+  }
+
+  Future<void> updateUser(String id, UserModel user) async {
+    await userDataSource.updateUser(id, user);
+  }
+
+  Future<void> deleteUser(String id) async {
+    await userDataSource.deleteUser(id);
+  }
+
 }

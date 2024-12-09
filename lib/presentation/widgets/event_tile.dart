@@ -6,6 +6,7 @@ class EventTile extends StatelessWidget {
   final DateTime eventDate;
   final String eventCategory;
   final String eventStatus;
+  final VoidCallback? onDelete; // Optional delete callback
 
   const EventTile({
     super.key,
@@ -13,6 +14,7 @@ class EventTile extends StatelessWidget {
     required this.eventDate,
     required this.eventCategory,
     required this.eventStatus,
+    this.onDelete,
   });
 
   @override
@@ -42,11 +44,21 @@ class EventTile extends StatelessWidget {
           "Category: $eventCategory\nDate: $formattedDate",
           style: TextStyle(color: Colors.grey[600]),
         ),
-        trailing: IconButton(
-          icon: const Icon(Icons.more_vert),
-          onPressed: () {
-            // Add options like edit/delete here
-          },
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconButton(
+              icon: const Icon(Icons.more_vert),
+              onPressed: () {
+                // Add options like edit here
+              },
+            ),
+            if (onDelete != null)
+              IconButton(
+                icon: const Icon(Icons.delete, color: Colors.red),
+                onPressed: onDelete, // Attach the delete callback
+              ),
+          ],
         ),
       ),
     );

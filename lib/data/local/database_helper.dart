@@ -2,6 +2,10 @@ import 'dart:async';
 import 'dart:io';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:path/path.dart';
+import 'datasources/sqlite_event_datasource.dart';
+import 'datasources/sqlite_friend_datasource.dart';
+import 'datasources/sqlite_gift_datasource.dart';
+import 'datasources/sqlite_user_datasource.dart';
 
 class DatabaseHelper {
   static Database? _database;
@@ -43,7 +47,6 @@ class DatabaseHelper {
         // Add further conditions here for future schema changes
       },
     );
-
   }
 
   Future<String> _getDatabasePath() async {
@@ -57,46 +60,64 @@ class DatabaseHelper {
   Future<void> createTables(Database db) async {
     await db.execute('''
     CREATE TABLE users (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      id TEXT PRIMARY KEY,
       name TEXT NOT NULL,
       email TEXT UNIQUE NOT NULL,
       preferences TEXT
     );
-  ''');
+    ''');
 
     await db.execute('''
     CREATE TABLE events (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      id TEXT PRIMARY KEY,
       name TEXT NOT NULL,
       date TEXT NOT NULL,
       location TEXT,
       description TEXT,
-      userId INTEGER NOT NULL,
+      userId TEXT NOT NULL,
+      status TEXT CHECK(status IN ('Upcoming', 'Current', 'Past')) NOT NULL,
       FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE
     );
-  ''');
+    ''');
 
     await db.execute('''
     CREATE TABLE gifts (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      id TEXT PRIMARY KEY,
       name TEXT NOT NULL,
       description TEXT,
       category TEXT,
       price REAL,
       status TEXT,
-      eventId INTEGER NOT NULL,
+      eventId TEXT NOT NULL,
       FOREIGN KEY (eventId) REFERENCES events(id) ON DELETE CASCADE
     );
-  ''');
+    ''');
 
     await db.execute('''
     CREATE TABLE friends (
-      userId INTEGER NOT NULL,
-      friendId INTEGER NOT NULL,
+      userId TEXT NOT NULL,
+      friendId TEXT NOT NULL,
       PRIMARY KEY (userId, friendId),
       FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE,
       FOREIGN KEY (friendId) REFERENCES users(id) ON DELETE CASCADE
     );
-  ''');
+    ''');
+  }
+
+  // Create data source instances
+  Future<SQLiteEventDataSource> get eventDataSource async {
+    return SQLiteEventDataSource(db: await database);
+  }
+
+  Future<SQLiteFriendDataSource> get friendDataSource async {
+    return SQLiteFriendDataSource(db: await database);
+  }
+
+  Future<SQLiteGiftDataSource> get giftDataSource async {
+    return SQLiteGiftDataSource(db: await database);
+  }
+
+  Future<SqliteUserDatasource> get userDataSource async {
+    return SqliteUserDatasource(db: await database);
   }
 }

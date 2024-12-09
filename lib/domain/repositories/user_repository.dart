@@ -1,6 +1,6 @@
-import '../../data/local/models/event_model.dart';
-import '../../data/local/models/gift_model.dart';
-import '../../data/local/models/user_model.dart';
+import '../../data/models/event_model.dart';
+import '../../data/models/gift_model.dart';
+import '../../data/models/user_model.dart';
 
 abstract class UserRepository {
   /// Fetches a user profile by ID.

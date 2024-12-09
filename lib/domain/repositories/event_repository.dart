@@ -1,6 +1,5 @@
 import '../entities/event.dart';
 
-/// Interface defining the contract for event-related operations.
 abstract class EventRepository {
   /// Retrieves all events as domain entities.
   Future<List<Event>> getAllEvents();
@@ -14,6 +13,5 @@ abstract class EventRepository {
   /// Deletes an event by its ID.
   Future<void> deleteEvent(int eventId);
 
-  /// Retrieves events filtered by status as domain entities.
   Future<List<Event>> getEventsByStatus(String status);
 }

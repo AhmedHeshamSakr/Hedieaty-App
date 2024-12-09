@@ -1,22 +1,37 @@
 import 'package:firebase_database/firebase_database.dart';
-import '../models/gift_dto.dart';
 
-class FirebaseGiftDataSource {
-  final DatabaseReference _database = FirebaseDatabase.instance.ref();
+import '../../models/gift_model.dart';
 
-  Future<void> addGift(GiftDTO giftDTO) async {
-    final giftRef = _database.child('events').child(giftDTO.eventId).child('gifts').push();
-    await giftRef.set(giftDTO.toMap());
+class GiftRemoteDataSource {
+  final DatabaseReference _dbRef = FirebaseDatabase.instance.ref("gifts");
+
+  Future<void> createGift(GiftModel gift) async {
+    await _dbRef.child(gift.id).set(gift.toJson());
   }
 
-  Future<void> updateGiftStatus(String giftId, String status, String pledgedBy) async {
-    final giftRef = _database.child('events').child(giftId);
-    await giftRef.update({'status': status, 'pledgedBy': pledgedBy});
+  Future<GiftModel?> getGiftById(String id) async {
+    final snapshot = await _dbRef.child(id).get();
+    if (snapshot.exists) {
+      return GiftModel.fromJson(Map<String, dynamic>.from(snapshot.value as Map));
+    }
+    return null;
   }
 
-  Future<List<GiftDTO>> getGiftsByEventId(String eventId) async {
-    final snapshot = await _database.child('events').child(eventId).child('gifts').once();
-    final giftsMap = snapshot.snapshot.value as Map<dynamic, dynamic>;
-    return giftsMap.values.map((gift) => GiftDTO.fromMap(gift)).toList();
+  Future<List<GiftModel>> fetchAllGifts() async {
+    final snapshot = await _dbRef.get();
+    if (snapshot.exists) {
+      final gifts = Map<String, dynamic>.from(snapshot.value as Map);
+      return gifts.values.map((json) => GiftModel.fromJson(Map<String, dynamic>.from(json))).toList();
+    }
+    return [];
+  }
+
+  Future<void> updateGift(String id, GiftModel gift) async {
+    await _dbRef.child(id).update(gift.toJson());
+  }
+
+  Future<void> deleteGift(String id) async {
+    await _dbRef.child(id).remove();
   }
 }
+
