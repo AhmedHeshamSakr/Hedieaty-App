@@ -6,7 +6,8 @@ class EventTile extends StatelessWidget {
   final DateTime eventDate;
   final String eventCategory;
   final String eventStatus;
-  final VoidCallback? onDelete; // Optional delete callback
+  final VoidCallback? onDelete;
+  final VoidCallback? onEdit; // Optional edit callback
 
   const EventTile({
     super.key,
@@ -15,6 +16,7 @@ class EventTile extends StatelessWidget {
     required this.eventCategory,
     required this.eventStatus,
     this.onDelete,
+    this.onEdit,
   });
 
   @override
@@ -44,20 +46,17 @@ class EventTile extends StatelessWidget {
           "Category: $eventCategory\nDate: $formattedDate",
           style: TextStyle(color: Colors.grey[600]),
         ),
-        trailing: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            IconButton(
-              icon: const Icon(Icons.more_vert),
-              onPressed: () {
-                // Add options like edit here
-              },
-            ),
-            if (onDelete != null)
-              IconButton(
-                icon: const Icon(Icons.delete, color: Colors.red),
-                onPressed: onDelete, // Attach the delete callback
-              ),
+        trailing: PopupMenuButton<String>(
+          onSelected: (value) {
+            if (value == 'Edit' && onEdit != null) {
+              onEdit!();
+            } else if (value == 'Delete' && onDelete != null) {
+              onDelete!();
+            }
+          },
+          itemBuilder: (context) => [
+            const PopupMenuItem(value: 'Edit', child: Text('Edit')),
+            const PopupMenuItem(value: 'Delete', child: Text('Delete')),
           ],
         ),
       ),

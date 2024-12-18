@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'dart:convert';
 
+import '../../core/utils/validators.dart';
 import '../local/datasources/sqlite_user_datasource.dart';
 import '../models/user_model.dart';
 
@@ -33,7 +34,7 @@ class FirebaseAuthService {
 
       // Create UserModel with comprehensive data mapping
       return UserModel(
-        id: null, // Use Firebase UID as identifier
+        id: userId, // Use Firebase UID as identifier
         name: data['name'] ?? 'Unknown',
         email: currentUser.email ?? 'Unknown',
         preferences: json.encode(data['preferences'] ?? {}),
@@ -45,33 +46,16 @@ class FirebaseAuthService {
     }
   }
 
-  /// Validate input before sign up
-  void _validateSignUpInput(String email, String password, String name) {
-    if (email.isEmpty) {
-      throw Exception('Email cannot be empty');
-    }
-    if (!RegExp(r'^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(email)) {
-      throw Exception('Invalid email format');
-    }
-    if (password.length < 6) {
-      throw Exception('Password must be at least 6 characters long');
-    }
-    if (name.trim().isEmpty) {
-      throw Exception('Name cannot be empty');
-    }
-  }
-
   /// Sign up a user with comprehensive error handling and data synchronization
-  Future<User?> signUp({
+  Future<UserModel?> signUp({
     required String email,
     required String password,
     required String name,
     Map<String, dynamic>? preferences,
   }) async {
     try {
-      // Validate input before proceeding
-      _validateSignUpInput(email, password, name);
-
+      Validators.validateEmail(email);
+      Validators.validatePassword(password);
       // Default preferences if not provided
       final userPreferences = preferences ?? {};
 
@@ -99,17 +83,18 @@ class FirebaseAuthService {
       // Store user details in Realtime Database
       await _databaseReference.child('users/${firebaseUser.uid}').set(userData);
 
-      // Create local SQLite user model
+      // Create local UserModel
       final localUser = UserModel(
+        id: firebaseUser.uid,
         name: name,
         email: email,
-        preferences: json.encode(userPreferences), id: null,
+        preferences: json.encode(userPreferences),
       );
 
       // Insert user into local SQLite database
       await sqliteUserDatasource.insertUser(localUser);
 
-      return firebaseUser;
+      return localUser;
     } on FirebaseAuthException catch (e) {
       // Centralized exception handling
       _handleAuthException(e, 'Sign Up Error');
@@ -121,7 +106,7 @@ class FirebaseAuthService {
   }
 
   /// Sign in method with improved error handling
-  Future<User?> signIn(String email, String password) async {
+  Future<UserModel?> signIn(String email, String password) async {
     try {
       // Basic input validation
       if (email.isEmpty || password.isEmpty) {
@@ -139,13 +124,14 @@ class FirebaseAuthService {
         throw Exception('Authentication failed');
       }
 
-      // Optional: Sync Firebase user data with local SQLite
+      // Fetch and sync user data
       final userModel = await getUserById(firebaseUser.uid);
       if (userModel != null) {
         await sqliteUserDatasource.updateUser(userModel);
+        return userModel;
       }
 
-      return firebaseUser;
+      return null;
     } on FirebaseAuthException catch (e) {
       _handleAuthException(e, 'Sign In Error');
       return null;

@@ -7,7 +7,7 @@ class EventModel extends Event {
     required super.date,
     required super.location,
     required super.description,
-    required super.userId,
+    required super.userId, required super.status,
   });
 
   // Convert from JSON to Model
@@ -18,7 +18,7 @@ class EventModel extends Event {
       date: DateTime.parse(json['date']),
       location: json['location'],
       description: json['description'],
-      userId: json['userId'],
+      userId: json['userId'], status: json['status'],
     );
   }
 
@@ -30,7 +30,7 @@ class EventModel extends Event {
       date: event.date,
       location: event.location,
       description: event.description,
-      userId: event.userId,
+      userId: event.userId, status: event.status,
     );
   }
 
@@ -42,7 +42,7 @@ class EventModel extends Event {
       date: date,
       location: location,
       description: description,
-      userId: userId,
+      userId: userId, status: status,
     );
   }
 
@@ -55,6 +55,7 @@ class EventModel extends Event {
       'location': location,
       'description': description,
       'userId': userId,
+      'status': status,
     };
   }
 }

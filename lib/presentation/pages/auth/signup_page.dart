@@ -23,7 +23,7 @@ class _SignupPageState extends State<SignupPage> {
   bool _isPasswordVisible = false;
 
   // Preferences map to allow more complex preference storage
-  Map<String, dynamic> _userPreferences = {};
+  final Map<String, dynamic> _userPreferences = {};
 
   @override
   void dispose() {
@@ -106,6 +106,13 @@ class _SignupPageState extends State<SignupPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                Center(
+                  child: Image.asset(
+                    'lib/assets/sign_log.png',
+                    width: 300, // Set width
+                    height: 300, // Set height
+                  ),
+                ),
                 // Name Input
                 TextFormField(
                   controller: _nameController,

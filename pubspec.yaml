@@ -7,6 +7,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
   path: ^1.9.0
   get_it: ^8.0.2
   sqflite: any
@@ -22,6 +23,7 @@ dependencies:
   firebase_auth: ^5.3.3
   logger: ^1.4.0
   equatable: ^2.0.7
+  firebase_messaging: ^15.1.6
 
 dev_dependencies:
   flutter_test:
@@ -33,6 +35,9 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   uses-material-design: true
+  assets:
+    - lib/assets/gifts_defualt.webp
+    - lib/assets/sign_log.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

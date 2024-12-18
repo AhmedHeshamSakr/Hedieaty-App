@@ -9,6 +9,8 @@ class GiftModel extends Gift {
     required super.price,
     required super.status,
     required super.eventId,
+    required super.userId,
+    required super.gifterId,
   });
 
   // Convert from JSON to Model
@@ -21,6 +23,8 @@ class GiftModel extends Gift {
       price: json['price'].toDouble(),
       status: json['status'],
       eventId: json['eventId'],
+      userId: json['userId'],
+      gifterId: json['gifterId'],
     );
   }
 
@@ -34,6 +38,8 @@ class GiftModel extends Gift {
       price: gift.price,
       status: gift.status,
       eventId: gift.eventId,
+      userId: gift.userId,
+      gifterId: gift.gifterId,
     );
   }
 
@@ -47,6 +53,8 @@ class GiftModel extends Gift {
       price: price,
       status: status,
       eventId: eventId,
+      userId: userId,
+      gifterId: gifterId,
     );
   }
 
@@ -60,6 +68,9 @@ class GiftModel extends Gift {
       'price': price,
       'status': status,
       'eventId': eventId,
+      'userId': userId,
+      'gifterId': gifterId,
     };
   }
+
 }

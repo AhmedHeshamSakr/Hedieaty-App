@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:hedieaty/domain/repositories/main_repository.dart';
 import 'package:hedieaty/presentation/pages/addFrinds/add_frinds_controller.dart';
 import 'package:hedieaty/presentation/pages/gifts/gift_controller.dart';
 import 'package:hedieaty/presentation/pages/home/home_controller.dart';
@@ -8,29 +10,32 @@ import 'package:hedieaty/presentation/pages/profile/profile_controller.dart';
 import 'package:hedieaty/presentation/routes/navigation_service.dart';
 import 'package:provider/provider.dart';
 import 'package:sqflite/sqflite.dart';
-
 import 'core/di/service_locator.dart'; // Dependency injection
 import 'core/constants/app_styles.dart'; // Global styles
 import 'data/local/database_helper.dart';
 import 'data/local/database_reset.dart';
 import 'data/remote/realtime_database_helper.dart';
 import 'data/utils/firebase_auth_service.dart'; // Firebase auth service
-import 'domain/repositories/event_repository.dart';
 import 'presentation/pages/auth/auth_controller.dart'; // Authentication controller
 import 'presentation/pages/events/event_controller.dart'; // Event list controller
 import 'presentation/routes/app_router.dart'; // Route management
 import 'presentation/routes/route_names.dart'; // Route names
 
+
+
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await DatabaseResetUtility.dropDatabase();
+  // await DatabaseResetUtility.dropDatabase();
 
   // Initialize Firebase with comprehensive error handling and logging
   await _initializeFirebase();
 
   // Initialize local and real-time databases
   await _initializeDatabases();
+
+  await _initializeFriendSync();
 
   // Setup dependency injection and run app
   setupServiceLocator();
@@ -42,13 +47,13 @@ Future<void> main() async {
           create: (_) => AuthController(serviceLocator<FirebaseAuthService>())
         ),
         ChangeNotifierProvider<EventListController>(
-            create: (_) => EventListController(serviceLocator<EventRepository>())
+            create: (_) => EventListController(serviceLocator<Repository>())
         ),
         ChangeNotifierProvider<HomePageController>(
           create: (_) => HomePageController()
         ),
         ChangeNotifierProvider<GiftController>(
-           create: (_) => GiftController()
+            create: (context) => GiftController(serviceLocator<Repository>())
         ),
         ChangeNotifierProvider<UserController>(
            create: (_) => UserController()
@@ -57,7 +62,7 @@ Future<void> main() async {
            create: (_) => PledgedGiftsController()
         ),
         ChangeNotifierProvider<FriendsController>(
-           create: (_) => FriendsController(),
+           create: (_) => FriendsController(serviceLocator<Repository>()),
         ),
       ],
       child: const HedieatyApp(),
@@ -82,7 +87,9 @@ class HedieatyApp extends StatelessWidget {
     );
   }
 }
-/// Comprehensive Firebase initialization with detailed error handling
+
+
+
 Future<void> _initializeFirebase() async {
   try {
     // Initialize Firebase Core
@@ -101,7 +108,6 @@ Future<void> _initializeFirebase() async {
   }
 }
 
-/// Comprehensive database initialization
 Future<void> _initializeDatabases() async {
   try {
     final realtimeDbHelper = RealTimeDatabaseHelper.instance;
@@ -113,7 +119,6 @@ Future<void> _initializeDatabases() async {
   }
 }
 
-/// Detailed database information logging
 Future<void> _logDatabaseInfo(Database localDb, RealTimeDatabaseHelper realtimeDb) async {
   // Log Local SQLite Database Tables
   final tables = await localDb.rawQuery('SELECT name FROM sqlite_master WHERE type="table"');
@@ -125,6 +130,28 @@ Future<void> _logDatabaseInfo(Database localDb, RealTimeDatabaseHelper realtimeD
     debugPrint("✅ Realtime Database connection validated");
   } catch (e) {
     debugPrint("❌ Realtime Database connection test failed: $e");
+  }
+}
+
+/// Initialize Friends Sync
+Future<void> _initializeFriendSync() async {
+  try {
+    // Fetch current user ID
+    final currentUserId = FirebaseAuth.instance.currentUser?.uid;
+    if (currentUserId == null) {
+      debugPrint("❌ No authenticated user found. Skipping sync.");
+      return;
+    }
+    debugPrint("🔄 Initializing friend sync for user: $currentUserId");
+    // Start real-time listeners
+    final friendsController = serviceLocator<FriendsController>();
+    friendsController.syncFriendsWithRemote(currentUserId);
+    // Perform an initial sync
+    await friendsController.syncDatabases(currentUserId);
+
+    debugPrint("✅ Friend sync initialized successfully");
+  } catch (e) {
+    debugPrint("❌ Error initializing friend sync: $e");
   }
 }
 

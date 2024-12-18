@@ -8,6 +8,7 @@ class Event extends Equatable {
   final String location;
   final String description;
   final String userId;
+  final String status;
 
   const Event({
     required this.id,
@@ -16,10 +17,11 @@ class Event extends Equatable {
     required this.location,
     required this.description,
     required this.userId,
+    required this.status,
   });
 
   @override
-  List<Object?> get props => [id, name, date, location, description, userId];
+  List<Object?> get props => [id, name, date, location, description, userId , status];
 }
 
 

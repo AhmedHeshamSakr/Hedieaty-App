@@ -17,6 +17,15 @@ class UserRemoteDataSource {
     return null;
   }
 
+  Future<UserModel?> getUserByEmail(String email) async {
+    final snapshot = await _dbRef.orderByChild("email").equalTo(email).limitToFirst(1).get();
+    if (snapshot.exists && snapshot.children.isNotEmpty) {
+      final Map<String, dynamic> userJson = Map<String, dynamic>.from(snapshot.children.first.value as Map);
+      return UserModel.fromJson(userJson);
+    }
+    return null;
+  }
+
   Future<List<UserModel>> fetchAllUsers() async {
     final snapshot = await _dbRef.get();
     if (snapshot.exists) {

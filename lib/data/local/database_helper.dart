@@ -89,7 +89,10 @@ class DatabaseHelper {
       price REAL,
       status TEXT,
       eventId TEXT NOT NULL,
-      FOREIGN KEY (eventId) REFERENCES events(id) ON DELETE CASCADE
+      userId TEXT NOT NULL,
+      gifterId TEXT,  
+      FOREIGN KEY (eventId) REFERENCES events(id) ON DELETE CASCADE,
+      FOREIGN KEY (gifterId) REFERENCES users(id) ON DELETE SET NULL 
     );
     ''');
 
@@ -119,5 +122,6 @@ class DatabaseHelper {
 
   Future<SqliteUserDatasource> get userDataSource async {
     return SqliteUserDatasource(db: await database);
+
   }
 }

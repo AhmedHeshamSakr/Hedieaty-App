@@ -17,19 +17,19 @@ Future<void> setupServiceLocator() async {
 
   // Register Local Datasources
   serviceLocator.registerLazySingleton<SqliteUserDatasource>(
-        () => SqliteUserDatasource(db: database),
+        () => SqliteUserDatasource(db: database), // Pass `db` parameter here
   );
 
   serviceLocator.registerLazySingleton<SQLiteEventDataSource>(
-        () => SQLiteEventDataSource(database: dp),
+        () => SQLiteEventDataSource(db: database), // Ensure parameter matches constructor
   );
 
-  serviceLocator.registerLazySingleton<SqliteFriendDatasource>(
-        () => SqliteFriendDatasource(database: database),
+  serviceLocator.registerLazySingleton<SQLiteFriendDataSource>(
+        () => SQLiteFriendDataSource(db: database), // Pass correct parameter
   );
 
-  serviceLocator.registerLazySingleton<SqliteGiftDatasource>(
-        () => SqliteGiftDatasource(database: database),
+  serviceLocator.registerLazySingleton<SQLiteGiftDataSource>(
+        () => SQLiteGiftDataSource(db: database), // Pass correct parameter
   );
 
   // Register Remote Datasources
@@ -46,14 +46,12 @@ Future<void> setupServiceLocator() async {
 
   // Register Repository
   serviceLocator.registerLazySingleton<Repository>(
-        () => RepositoryImpl._(
-      serviceLocator<SQLiteEventDatasource>(),
-      serviceLocator<SqliteFriendDatasource>(),
-      serviceLocator<SqliteGiftDatasource>(),
+        () => RepositoryImpl(
+      serviceLocator<SQLiteEventDataSource>(),
+      serviceLocator<SQLiteFriendDataSource>(),
+      serviceLocator<SQLiteGiftDataSource>(),
       serviceLocator<SqliteUserDatasource>(),
       serviceLocator<RealTimeDatabaseHelper>(),
     ),
   );
-
-  // You can add more services and controllers here as needed
 }

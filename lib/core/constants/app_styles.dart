@@ -77,11 +77,12 @@ class AppStyles {
   // AppBar Text Style
   static const TextStyle appBarTextStyle = TextStyle(
     fontSize: 20,
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.w600, // Slightly less bold
     color: AppColors.onPrimary,
+    letterSpacing: 0.5, // Add a bit of letter spacing for a modern feel
   );
 
-  // App theme (Define overall theme styles)
+  // App theme with rounded AppBar
   static ThemeData get lightTheme {
     return ThemeData(
       brightness: Brightness.light,
@@ -91,6 +92,12 @@ class AppStyles {
         backgroundColor: AppColors.primary,
         titleTextStyle: appBarTextStyle,
         elevation: 4,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(20),
+            bottomRight: Radius.circular(20),
+          ),
+        ),
       ),
       textTheme: TextTheme(
         displayLarge: headline1,
@@ -131,6 +138,12 @@ class AppStyles {
         backgroundColor: AppColors.primary,
         titleTextStyle: appBarTextStyle.copyWith(color: AppColors.onPrimary),
         elevation: 4,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(20),
+            bottomRight: Radius.circular(20),
+          ),
+        ),
       ),
       textTheme: TextTheme(
         displayLarge: headline1.copyWith(color: AppColors.darkOnBackground),

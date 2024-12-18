@@ -37,4 +37,15 @@ class FriendModel extends Friend {
       'friendId': friendId,
     };
   }
+
+  // Add a `copyWith` method
+  FriendModel copyWith({
+    String? userId,
+    String? friendId,
+  }) {
+    return FriendModel(
+      userId: userId ?? this.userId,
+      friendId: friendId ?? this.friendId,
+    );
+  }
 }

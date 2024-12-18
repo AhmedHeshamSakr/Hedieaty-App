@@ -1,22 +1,3 @@
-// •	Where to import:
-// •	In forms or controllers where user input needs to be validated.
-// •	In UI pages like login, sign-up, or profile forms.
-//
-// import 'package:your_app_name/core/utils/validators.dart';
-//
-// // Validate email in a login form
-// final emailError = Validators.validateEmail(userEmail);
-// if (emailError != null) {
-// print(emailError); // Show error to the user
-// }
-//
-// // Validate password in a sign-up form
-// final passwordError = Validators.validatePassword(userPassword);
-// if (passwordError != null) {
-// print(passwordError);
-// }
-
-
 
 class Validators {
   /// Checks if the input is a valid email.
