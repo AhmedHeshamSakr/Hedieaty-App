@@ -1,24 +1,14 @@
-class Friend {
-  final int id;
-  final String name;
-  final String phone;
+import 'package:equatable/equatable.dart';
 
-  Friend({
-    required this.id,
-    required this.name,
-    required this.phone,
+class Friend extends Equatable {
+  final String userId;
+  final String friendId;
+
+  const Friend({
+    required this.userId,
+    required this.friendId,
   });
 
-  // Equality and hashCode
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-          other is Friend &&
-              runtimeType == other.runtimeType &&
-              id == other.id &&
-              name == other.name &&
-              phone == other.phone;
-
-  @override
-  int get hashCode => id.hashCode ^ name.hashCode ^ phone.hashCode;
+  List<Object?> get props => [userId, friendId];
 }

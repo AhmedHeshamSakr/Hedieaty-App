@@ -2,6 +2,10 @@ import 'dart:async';
 import 'dart:io';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:path/path.dart';
+import 'datasources/sqlite_event_datasource.dart';
+import 'datasources/sqlite_friend_datasource.dart';
+import 'datasources/sqlite_gift_datasource.dart';
+import 'datasources/sqlite_user_datasource.dart';
 
 class DatabaseHelper {
   static Database? _database;
@@ -28,15 +32,19 @@ class DatabaseHelper {
     // Open the database
     return openDatabase(
       path,
-      version: 1,
+      version: 2, // Increment the version to reflect schema changes
       onConfigure: (db) async {
-        await db.execute('PRAGMA foreign_keys = ON');
+        await db.execute('PRAGMA foreign_keys = ON'); // Enable foreign key constraints
       },
-      onCreate: (db, version) => _createTables(db),
+      onCreate: (db, version) async {
+        await createTables(db); // Create tables for the first time
+      },
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < 2) {
-          // Example schema update
+          // Apply schema updates for version 2
+          await createTables(db);
         }
+        // Add further conditions here for future schema changes
       },
     );
   }
@@ -49,56 +57,71 @@ class DatabaseHelper {
     }
   }
 
-  Future<void> _createTables(Database db) async {
-    // Creating tables
+  Future<void> createTables(Database db) async {
     await db.execute('''
-      CREATE TABLE users_new (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      firebase_uid TEXT NOT NULL,
-      name TEXT,
-      email TEXT,
+    CREATE TABLE users (
+      id TEXT PRIMARY KEY,
+      name TEXT NOT NULL,
+      email TEXT UNIQUE NOT NULL,
       preferences TEXT
     );
-    INSERT INTO users_new (id, firebase_uid, name, email, preferences)
-    SELECT id, NULL, name, email, preferences FROM users;
-    DROP TABLE users;
-    ALTER TABLE users_new RENAME TO users;
-
     ''');
 
     await db.execute('''
-      CREATE TABLE events(
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT,
-        date TEXT,
-        location TEXT,
-        description TEXT,
-        userId INTEGER,
-        FOREIGN KEY (userId) REFERENCES users(id)
-      );
+    CREATE TABLE events (
+      id TEXT PRIMARY KEY,
+      name TEXT NOT NULL,
+      date TEXT NOT NULL,
+      location TEXT,
+      description TEXT,
+      userId TEXT NOT NULL,
+      status TEXT CHECK(status IN ('Upcoming', 'Current', 'Past')) NOT NULL,
+      FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE
+    );
     ''');
 
     await db.execute('''
-      CREATE TABLE gifts(
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT,
-        description TEXT,
-        category TEXT,
-        price REAL,
-        status TEXT,
-        eventId INTEGER,
-        FOREIGN KEY (eventId) REFERENCES events(id)
-      );
+    CREATE TABLE gifts (
+      id TEXT PRIMARY KEY,
+      name TEXT NOT NULL,
+      description TEXT,
+      category TEXT,
+      price REAL,
+      status TEXT,
+      eventId TEXT NOT NULL,
+      userId TEXT NOT NULL,
+      gifterId TEXT,  
+      FOREIGN KEY (eventId) REFERENCES events(id) ON DELETE CASCADE,
+      FOREIGN KEY (gifterId) REFERENCES users(id) ON DELETE SET NULL 
+    );
     ''');
 
     await db.execute('''
-      CREATE TABLE friends(
-        userId INTEGER,
-        friendId INTEGER,
-        PRIMARY KEY (userId, friendId),
-        FOREIGN KEY (userId) REFERENCES users(id),
-        FOREIGN KEY (friendId) REFERENCES users(id)
-      );
+    CREATE TABLE friends (
+      userId TEXT NOT NULL,
+      friendId TEXT NOT NULL,
+      PRIMARY KEY (userId, friendId),
+      FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE,
+      FOREIGN KEY (friendId) REFERENCES users(id) ON DELETE CASCADE
+    );
     ''');
+  }
+
+  // Create data source instances
+  Future<SQLiteEventDataSource> get eventDataSource async {
+    return SQLiteEventDataSource(db: await database);
+  }
+
+  Future<SQLiteFriendDataSource> get friendDataSource async {
+    return SQLiteFriendDataSource(db: await database);
+  }
+
+  Future<SQLiteGiftDataSource> get giftDataSource async {
+    return SQLiteGiftDataSource(db: await database);
+  }
+
+  Future<SqliteUserDatasource> get userDataSource async {
+    return SqliteUserDatasource(db: await database);
+
   }
 }

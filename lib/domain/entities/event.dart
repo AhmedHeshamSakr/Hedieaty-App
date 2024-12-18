@@ -1,31 +1,27 @@
-class Event {
-  final int id;
+// domain/entities/event.dart
+import 'package:equatable/equatable.dart';
+
+class Event extends Equatable {
+  final String id;
   final String name;
   final DateTime date;
   final String location;
   final String description;
+  final String userId;
+  final String status;
 
-  Event({
+  const Event({
     required this.id,
     required this.name,
     required this.date,
     required this.location,
     required this.description,
+    required this.userId,
+    required this.status,
   });
 
-  // Equality and hashCode for easier comparison and testing
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-          other is Event &&
-              runtimeType == other.runtimeType &&
-              id == other.id &&
-              name == other.name &&
-              date == other.date &&
-              location == other.location &&
-              description == other.description;
-
-  @override
-  int get hashCode =>
-      id.hashCode ^ name.hashCode ^ date.hashCode ^ location.hashCode ^ description.hashCode;
+  List<Object?> get props => [id, name, date, location, description, userId , status];
 }
+
+

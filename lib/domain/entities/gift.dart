@@ -1,13 +1,17 @@
-class Gift {
-  final int id;
+import 'package:equatable/equatable.dart';
+
+class Gift extends Equatable {
+  final String id;
   final String name;
   final String description;
   final String category;
   final double price;
-  final String status; // Could be an enum instead of a string
-  final int eventId;
+  final String status;
+  final String eventId;
+  final String userId;
+  final String? gifterId;
 
-  Gift({
+  const Gift({
     required this.id,
     required this.name,
     required this.description,
@@ -15,29 +19,47 @@ class Gift {
     required this.price,
     required this.status,
     required this.eventId,
+    required this.userId,
+    this.gifterId,
   });
 
-  // Equality and hashCode
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-          other is Gift &&
-              runtimeType == other.runtimeType &&
-              id == other.id &&
-              name == other.name &&
-              description == other.description &&
-              category == other.category &&
-              price == other.price &&
-              status == other.status &&
-              eventId == other.eventId;
+  Gift copyWith({
+    String? id,
+    String? name,
+    String? description,
+    String? category,
+    double? price,
+    String? status,
+    String? eventId,
+    String? userId,
+    String? gifterId,
+  }) {
+    return Gift(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      description: description ?? this.description,
+      category: category ?? this.category,
+      price: price ?? this.price,
+      status: status ?? this.status,
+      eventId: eventId ?? this.eventId,
+      userId: userId ?? this.userId,
+      gifterId: gifterId ?? this.gifterId,
+    );
+  }
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'description': description,
+      'category': category,
+      'price': price,
+      'status': status,
+      'eventId': eventId,
+      'userId': userId,
+      'gifterId': gifterId,
+    };
+  }
 
   @override
-  int get hashCode =>
-      id.hashCode ^
-      name.hashCode ^
-      description.hashCode ^
-      category.hashCode ^
-      price.hashCode ^
-      status.hashCode ^
-      eventId.hashCode;
+  List<Object?> get props => [id, name, description, category, price, status, eventId, userId, gifterId];
 }

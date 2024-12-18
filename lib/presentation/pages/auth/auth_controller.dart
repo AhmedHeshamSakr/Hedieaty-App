@@ -28,15 +28,35 @@ class AuthController extends ChangeNotifier {
   }
 
   /// Signup method with user details
-  Future<bool> signUp(String name, String email, String password, String preferences) async {
+  Future<bool> signUp({
+    required String name,
+    required String email,
+    required String password,
+    Map<String, dynamic>? preferences,
+  }) async {
     _startLoading();
     try {
       clearError(); // Reset error state before operation
 
-      // Convert preferences to a map if it's a string
-      Map<String, dynamic> preferencesMap = {'preferences': preferences};
+      // Prepare preferences map
+      final userPreferences = preferences ?? {};
 
-      final user = await _authService.signUp(email, password, name, preferencesMap);
+      // If a single preferences string is passed, convert it to a map
+      if (preferences == null && preferences is String && preferences!.isNotEmpty) {
+        try {
+          userPreferences['custom_preference'] = preferences;
+        } catch (e) {
+          _setError('Invalid preferences format');
+          return false;
+        }
+      }
+
+      final user = await _authService.signUp(
+        email: email,
+        password: password,
+        name: name,
+        preferences: userPreferences,
+      );
       return user != null;
     } catch (e) {
       _setError(e.toString());
@@ -48,10 +68,29 @@ class AuthController extends ChangeNotifier {
 
   /// Logout method
   Future<void> logout() async {
+    _startLoading();
     try {
+      clearError();
       await _authService.signOut();
     } catch (e) {
       _setError(e.toString());
+    } finally {
+      _stopLoading();
+    }
+  }
+
+  /// Password reset method
+  Future<bool> resetPassword(String email) async {
+    _startLoading();
+    try {
+      clearError();
+      await _authService.resetPassword(email);
+      return true;
+    } catch (e) {
+      _setError(e.toString());
+      return false;
+    } finally {
+      _stopLoading();
     }
   }
 

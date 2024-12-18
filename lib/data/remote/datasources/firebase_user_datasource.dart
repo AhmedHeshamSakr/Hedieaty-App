@@ -1,17 +1,46 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import '../models/user_dto.dart';
+import 'package:firebase_database/firebase_database.dart';
 
-class FirestoreUserDataSource {
-  Future<void> setUser(UserDTO userDTO) async {
-    await FirebaseFirestore.instance.collection('users').doc(userDTO.id).set(userDTO.toMap());
+import '../../models/user_model.dart';
+
+class UserRemoteDataSource {
+  final DatabaseReference _dbRef = FirebaseDatabase.instance.ref("users");
+
+  Future<void> createUser(UserModel user) async {
+    await _dbRef.child(user.id).set(user.toJson());
   }
 
-  Future<UserDTO?> getUser(String userId) async {
-    final doc = await FirebaseFirestore.instance.collection('users').doc(userId).get();
-    if (doc.exists) {
-      return UserDTO.fromMap(doc.data() as Map<String, dynamic>, doc.id);
+  Future<UserModel?> getUserById(String id) async {
+    final snapshot = await _dbRef.child(id).get();
+    if (snapshot.exists) {
+      return UserModel.fromJson(Map<String, dynamic>.from(snapshot.value as Map));
     }
     return null;
   }
 
+  Future<UserModel?> getUserByEmail(String email) async {
+    final snapshot = await _dbRef.orderByChild("email").equalTo(email).limitToFirst(1).get();
+    if (snapshot.exists && snapshot.children.isNotEmpty) {
+      final Map<String, dynamic> userJson = Map<String, dynamic>.from(snapshot.children.first.value as Map);
+      return UserModel.fromJson(userJson);
+    }
+    return null;
+  }
+
+  Future<List<UserModel>> fetchAllUsers() async {
+    final snapshot = await _dbRef.get();
+    if (snapshot.exists) {
+      final users = Map<String, dynamic>.from(snapshot.value as Map);
+      return users.values.map((json) => UserModel.fromJson(Map<String, dynamic>.from(json))).toList();
+    }
+    return [];
+  }
+
+  Future<void> updateUser(String id, UserModel user) async {
+    await _dbRef.child(id).update(user.toJson());
+  }
+
+  Future<void> deleteUser(String id) async {
+    await _dbRef.child(id).remove();
+  }
 }
+
