@@ -16,6 +16,8 @@ import 'data/local/database_helper.dart';
 import 'data/local/database_reset.dart';
 import 'data/remote/realtime_database_helper.dart';
 import 'data/utils/firebase_auth_service.dart'; // Firebase auth service
+import 'data/utils/notification_service.dart';
+import 'data/utils/sync_database.dart';
 import 'presentation/pages/auth/auth_controller.dart'; // Authentication controller
 import 'presentation/pages/events/event_controller.dart'; // Event list controller
 import 'presentation/routes/app_router.dart'; // Route management
@@ -31,35 +33,41 @@ Future<void> main() async {
 
   // Initialize Firebase with comprehensive error handling and logging
   await _initializeFirebase();
-
+  await NotificationService.initializeNotification();
   // Initialize local and real-time databases
   await _initializeDatabases();
 
-  await _initializeFriendSync();
 
   // Setup dependency injection and run app
   setupServiceLocator();
-
+  // NotificationService().showSimpleNotification(
+  //   title: 'Hello!',
+  //   body: 'This is a test notification.',
+  // );
+  // NotificationService().showGiftPledgedNotification(
+  //   giftName: 'Birthday Cake',
+  //   giftDescription: 'Someone pledged for your gift!',
+  // );
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider<AuthController>(
-          create: (_) => AuthController(serviceLocator<FirebaseAuthService>())
+          create: (_) => AuthController(serviceLocator<FirebaseAuthService>(), serviceLocator<SyncService>())
         ),
         ChangeNotifierProvider<EventListController>(
             create: (_) => EventListController(serviceLocator<Repository>())
         ),
         ChangeNotifierProvider<HomePageController>(
-          create: (_) => HomePageController()
+          create: (_) => HomePageController(serviceLocator<Repository>())
         ),
         ChangeNotifierProvider<GiftController>(
             create: (context) => GiftController(serviceLocator<Repository>())
         ),
         ChangeNotifierProvider<UserController>(
-           create: (_) => UserController()
+           create: (_) => UserController(serviceLocator<Repository>())
         ),
         ChangeNotifierProvider<PledgedGiftsController>(
-           create: (_) => PledgedGiftsController()
+           create: (_) => PledgedGiftsController(serviceLocator<Repository>())
         ),
         ChangeNotifierProvider<FriendsController>(
            create: (_) => FriendsController(serviceLocator<Repository>()),
@@ -134,26 +142,26 @@ Future<void> _logDatabaseInfo(Database localDb, RealTimeDatabaseHelper realtimeD
 }
 
 /// Initialize Friends Sync
-Future<void> _initializeFriendSync() async {
-  try {
-    // Fetch current user ID
-    final currentUserId = FirebaseAuth.instance.currentUser?.uid;
-    if (currentUserId == null) {
-      debugPrint("❌ No authenticated user found. Skipping sync.");
-      return;
-    }
-    debugPrint("🔄 Initializing friend sync for user: $currentUserId");
-    // Start real-time listeners
-    final friendsController = serviceLocator<FriendsController>();
-    friendsController.syncFriendsWithRemote(currentUserId);
-    // Perform an initial sync
-    await friendsController.syncDatabases(currentUserId);
-
-    debugPrint("✅ Friend sync initialized successfully");
-  } catch (e) {
-    debugPrint("❌ Error initializing friend sync: $e");
-  }
-}
+// Future<void> _initializeFriendSync() async {
+//   try {
+//     // Fetch current user ID
+//     final currentUserId = FirebaseAuth.instance.currentUser?.uid;
+//     if (currentUserId == null) {
+//       debugPrint("❌ No authenticated user found. Skipping sync.");
+//       return;
+//     }
+//     debugPrint("🔄 Initializing friend sync for user: $currentUserId");
+//     // Start real-time listeners
+//     final friendsController = serviceLocator<FriendsController>();
+//     friendsController.syncFriendsWithRemote(currentUserId);
+//     // Perform an initial sync
+//     await friendsController.syncDatabases(currentUserId);
+//
+//     debugPrint("✅ Friend sync initialized successfully");
+//   } catch (e) {
+//     debugPrint("❌ Error initializing friend sync: $e");
+//   }
+// }
 
 /// Custom exception for Firebase initialization errors
 class FirebaseInitializationException implements Exception {

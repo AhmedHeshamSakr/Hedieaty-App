@@ -26,6 +26,8 @@ class UserRemoteDataSource {
     return null;
   }
 
+
+
   Future<List<UserModel>> fetchAllUsers() async {
     final snapshot = await _dbRef.get();
     if (snapshot.exists) {

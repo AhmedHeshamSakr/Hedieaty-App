@@ -12,14 +12,18 @@ abstract class Repository {
     Future<void> createEvent(Event event);
   Future<void> updateEvent(Event event);
   Future<void> deleteEvent(String id);
+  Future<int> upcomingEvents(String userId) ;
 
-  // Friend Methods
+
+    // Friend Methods
   Future<List<Friend>> getFriends();
   Future<void> createFriend(Friend friend);
   Future<void> deleteFriend(String friendId);
   Future<bool> isFriendExists({required String userId, required String friendId});
   void syncFriendsWithRemote(String currentUserId);
   Future<void> syncDatabases(String currentUserId);
+  Future<List<Friend>> getFriendsByUserId(String userId);
+
 
 
     // Gift Methods
@@ -34,8 +38,10 @@ abstract class Repository {
   Future<void> createGift(Gift gift);
   Future<void> updateGift(Gift gift);
   Future<void> deleteGift(String id);
+  Future<List<Gift>> fetchGiftsPledgedByUser(String gifterId);
 
-  // User Methods
+
+    // User Methods
   Future<User?> getUser(String id);
   Future<void> createUser(User user);
   Future<void> updateUser(User user);
@@ -43,9 +49,6 @@ abstract class Repository {
   Future<User?> getUserByEmail(String email);
 
 
-  // Future<void> sendFriendRequest(FriendRequest request);
-  // Future<void> acceptFriendRequest(String requestId);
-  // Future<void> rejectFriendRequest(String requestId);
-  // Future<List<FriendRequest>> fetchFriendRequests(String userId);
-  //
+
+
 }

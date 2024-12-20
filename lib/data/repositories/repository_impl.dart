@@ -68,11 +68,11 @@ class RepositoryImpl implements Repository {
     }
 
     // Remove extra local friends not in remote
-    for (final friend in localFriends) {
-      if (!remoteFriends.any((f) => f.friendId == friend.friendId)) {
-        await _localFriendDataSource.deleteFriend(friend.friendId);
-      }
-    }
+    // for (final friend in localFriends) {
+    //   if (!remoteFriends.any((f) => f.friendId == friend.friendId)) {
+    //     await _localFriendDataSource.deleteFriend(friend.friendId);
+    //   }
+    // }
   }
 
   @override
@@ -93,11 +93,10 @@ class RepositoryImpl implements Repository {
       final friendId = event.snapshot.key;
       if (friendId != null) {
         // Remove the friend from the local database
-        _localFriendDataSource.deleteFriend(friendId);
+        _localFriendDataSource.deleteFriend(friendId ,currentUserId );
       }
     });
   }
-
 
   // Event Methods
   @override
@@ -113,6 +112,11 @@ class RepositoryImpl implements Repository {
       final localEventModels = await _localEventDataSource.getEvents();
       return localEventModels.map((model) => model.toEntity()).toList();
     }
+  }
+
+  @override
+  Future<int> upcomingEvents(String userId) async {
+    return await _remoteDatabaseHelper.upcomingEvents(userId);
   }
 
   @override
@@ -204,19 +208,25 @@ class RepositoryImpl implements Repository {
       // Check remotely first
       final existsRemotely = await _remoteDatabaseHelper.isFriendExistsRemotely(
           userId: userId, friendId: friendId);
-      if (existsRemotely) {
-        return true;
-      }
+      // if (existsRemotely) {
+      //   return true;
+      // }
       // If not found remotely, check locally
       final existsLocally = await _localFriendDataSource.isFriendExistsLocally(
           userId: userId, friendId: friendId);
-      return existsLocally;
+      return existsRemotely;
     } catch (e) {
       // Log the error and handle any exceptions
       debugPrint('Error checking friend existence: $e');
       return false;
     }
   }
+
+  Future<List<Friend>> getFriendsByUserId(String userId) async {
+    return await _remoteDatabaseHelper.getFriendsByUserId(userId);
+  }
+
+
 
 
   @override
@@ -226,11 +236,16 @@ class RepositoryImpl implements Repository {
       throw Exception('No authenticated user');
     }
     // Remove relationship remotely
-    await _remoteDatabaseHelper.deleteFriend(currentUser.uid, friendId);
-    // Remove reciprocal relationship remotely
-    await _remoteDatabaseHelper.deleteFriend(friendId, currentUser.uid);
-    // Remove relationship locally
-    await _localFriendDataSource.deleteFriend(friendId);
+    try {
+      await _remoteDatabaseHelper.deleteFriend(currentUser.uid, friendId);
+      await _remoteDatabaseHelper.deleteFriend(friendId, currentUser.uid);
+      await _localFriendDataSource.deleteFriend(currentUser.uid, friendId);
+      await _localFriendDataSource.deleteFriend(friendId, currentUser.uid);
+
+    } catch (e) {
+      debugPrint('Error during friend deletion: $e');
+    }
+
   }
 
   // Gift Methods
@@ -315,6 +330,7 @@ class RepositoryImpl implements Repository {
   }
 
   // Unpledge a gift and sync between local and remote
+  @override
   Future<void> unpledgeGift(String giftId) async {
     try {
       await _remoteDatabaseHelper.unpledgeGift(giftId);
@@ -324,10 +340,15 @@ class RepositoryImpl implements Repository {
     }
   }
 
+  Future<List<GiftModel>> fetchGiftsPledgedByUser(String gifterId) async {
+    return _remoteDatabaseHelper.fetchGiftsPledgedByUser(gifterId);
+  }
 
 
 
-  // Other methods similar to before, with added sync logic
+
+
+    // Other methods similar to before, with added sync logic
   @override
   Future<void> createGift(Gift gift) async {
     try {
@@ -475,46 +496,4 @@ class RepositoryImpl implements Repository {
     await _localUserDataSource.deleteUser(id);
   }
 }
-
-
-
-
-
-// Future<void> toggleGiftStatus(String giftId, String newStatus) async {
-//   try {
-//     // Get the current user to verify they are the gifter
-//     final currentUser = firebase_auth.FirebaseAuth.instance.currentUser;
-//     if (currentUser == null) {
-//       throw Exception('No authenticated user');
-//     }
-//     // Toggle status in remote database
-//     await _remoteDatabaseHelper.toggleGiftStatus(giftId, newStatus);
-//     // Toggle status in local database
-//     await _localGiftDataSource.toggleGiftStatus(giftId, newStatus,currentUser.uid);
-//   } catch (e) {
-//     throw Exception('Failed to toggle gift status: ${e.toString()}');
-//   }
-// }
-
-
-
-// Future<GiftModel?> pledgeGift(String giftId) async {
-//   try {
-//     // First, pledge the gift in the remote database
-//     final remoteGift = await  _remoteDatabaseHelper.pledgeGift(giftId);
-//     if (remoteGift != null) {
-//       // If successful in remote, update local database
-//       final currentUser =firebase_auth.FirebaseAuth.instance.currentUser;
-//       if (currentUser == null) {
-//         throw Exception('No authenticated user');
-//       }
-//       await _localGiftDataSource.pledgeGift(giftId, currentUser.uid);
-//       return remoteGift;
-//     }
-//     return null;
-//   } catch (e) {
-//     debugPrint('Error pledging gift: $e');
-//     rethrow;
-//   }
-//
 

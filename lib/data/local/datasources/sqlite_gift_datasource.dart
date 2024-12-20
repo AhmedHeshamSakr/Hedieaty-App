@@ -61,6 +61,7 @@ class SQLiteGiftDataSource {
   Future<GiftModel?> updateGift(GiftModel gift) async {
     await db.update(
         'gifts', gift.toJson(), where: 'id = ?', whereArgs: [gift.id]);
+    return null;
   }
 
   Future<void> pledgeGift(String giftId, String gifterId) async {

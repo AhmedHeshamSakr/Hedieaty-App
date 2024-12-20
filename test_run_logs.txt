@@ -1,0 +1,666 @@
+Starting screen recording...
+Running integration test...
+Resolving dependencies...
+Downloading packages...
+  async 2.11.0 (2.12.0 available)
+  boolean_selector 2.1.1 (2.1.2 available)
+  characters 1.3.0 (1.4.0 available)
+  clock 1.1.1 (1.1.2 available)
+  collection 1.18.0 (1.19.1 available)
+  fake_async 1.3.1 (1.3.2 available)
+  file 7.0.0 (7.0.1 available)
+  http_parser 4.0.2 (4.1.1 available)
+  intl 0.19.0 (0.20.1 available)
+  leak_tracker 10.0.5 (10.0.8 available)
+  leak_tracker_flutter_testing 3.0.5 (3.0.9 available)
+  lints 5.0.0 (5.1.1 available)
+  logger 1.4.0 (2.5.0 available)
+  matcher 0.12.16+1 (0.12.17 available)
+  material_color_utilities 0.11.1 (0.12.0 available)
+  meta 1.15.0 (1.16.0 available)
+  path 1.9.0 (1.9.1 available)
+  platform 3.1.5 (3.1.6 available)
+  process 5.0.2 (5.0.3 available)
+  source_span 1.10.0 (1.10.1 available)
+  stack_trace 1.11.1 (1.12.1 available)
+  stream_channel 2.1.2 (2.1.3 available)
+  string_scanner 1.2.0 (1.4.1 available)
+  term_glyph 1.2.1 (1.2.2 available)
+  test_api 0.7.2 (0.7.4 available)
+  vm_service 14.2.5 (15.0.0 available)
+  webdriver 3.0.3 (3.0.4 available)
+Got dependencies!
+27 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+Running Gradle task 'assembleDebug'...                              7.6s
+✓ Built build/app/outputs/flutter-apk/app-debug.apk
+Installing build/app/outputs/flutter-apk/app-debug.apk...          954ms
+I/Gralloc4( 9230): mapper 4.x is not supported
+I/xample.hedieaty( 9230): Compiler allocated 5250KB to compile void android.view.ViewRootImpl.performTraversals()
+VMServiceFlutterDriver: Connecting to Flutter application at http://127.0.0.1:63038/Jhipz40MgKk=/
+VMServiceFlutterDriver: Isolate found with number: 1223380660460323
+VMServiceFlutterDriver: Isolate is paused at start.
+VMServiceFlutterDriver: Attempting to resume isolate
+I/flutter ( 9230): 00:00 +0: (setUpAll)
+VMServiceFlutterDriver: Connected to Flutter application.
+D/CompatChangeReporter( 9230): Compat change id reported: 3400644; UID 10207; state: ENABLED
+D/FirebaseAuth( 9230): Notifying id token listeners about user ( X0muxJo7m6eGWivJqyE8BxvSHBd2 ).
+I/flutter ( 9230): ✅ Firebase initialized successfully
+W/SQLiteLog( 9230): (28) double-quoted string literal: "table"
+I/flutter ( 9230): 📊 Local SQLite Tables:
+I/flutter ( 9230):   - android_metadata
+I/flutter ( 9230):   - users
+I/flutter ( 9230):   - events
+I/flutter ( 9230):   - gifts
+I/flutter ( 9230):   - friends
+I/flutter ( 9230): ✅ Realtime Database connection validated
+I/flutter ( 9230): 00:00 +1: End-to-end test: User signup, login, and event creation Complete user journey test
+W/WindowOnBackDispatcher( 9230): OnBackInvokedCallback is not enabled for the application.
+W/WindowOnBackDispatcher( 9230): Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+I/flutter ( 9230): 📱 Starting application test flow...
+D/EGL_emulation( 9230): app_time_stats: avg=1040.72ms min=913.18ms max=1168.27ms count=2
+D/ProfileInstaller( 9230): Installing profile for com.example.hedieaty
+VMServiceFlutterDriver: request_data message is taking a long time to complete...
+I/flutter ( 9230): 🔄 Navigating to signup page...
+D/EGL_emulation( 9230): app_time_stats: avg=3021.66ms min=3021.66ms max=3021.66ms count=1
+I/flutter ( 9230): ✍️ Filling signup form...
+I/ImeTracker( 9230): com.example.hedieaty:3d449642: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager( 9230): showSoftInput() view=io.flutter.embedding.android.FlutterView{2055754 VFE...... .F....ID 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+I/ImeTracker( 9230): com.example.hedieaty:9474560e: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager( 9230): showSoftInput() view=io.flutter.embedding.android.FlutterView{2055754 VFE...... .F....ID 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/EGL_emulation( 9230): app_time_stats: avg=2970.84ms min=854.52ms max=5087.16ms count=2
+I/ImeTracker( 9230): com.example.hedieaty:840f34e0: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager( 9230): showSoftInput() view=io.flutter.embedding.android.FlutterView{2055754 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/InputConnectionAdaptor( 9230): The input method toggled cursor monitoring on
+D/InsetsController( 9230): show(ime(), fromIme=true)
+W/InteractionJankMonitor( 9230): Initializing without READ_DEVICE_CONFIG permission. enabled=false, interval=1, missedFrameThreshold=3, frameTimeThreshold=64, package=com.example.hedieaty
+D/InsetsController( 9230): show(ime(), fromIme=true)
+I/ImeTracker( 9230): com.example.hedieaty:840f34e0: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+I/ImeTracker( 9230): com.example.hedieaty:8e33300f: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager( 9230): showSoftInput() view=io.flutter.embedding.android.FlutterView{2055754 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+I/ImeTracker( 9230): com.example.hedieaty:21c675ba: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager( 9230): showSoftInput() view=io.flutter.embedding.android.FlutterView{2055754 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/InputConnectionAdaptor( 9230): The input method toggled cursor monitoring on
+I/ImeTracker( 9230): com.example.hedieaty:9474560e: onShown
+D/EGL_emulation( 9230): app_time_stats: avg=253.64ms min=2.97ms max=800.35ms count=7
+I/ImeTracker( 9230): com.example.hedieaty:2ec1e4af: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager( 9230): showSoftInput() view=io.flutter.embedding.android.FlutterView{2055754 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/InsetsController( 9230): show(ime(), fromIme=true)
+I/ImeTracker( 9230): com.example.hedieaty:21c675ba: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+D/InsetsController( 9230): show(ime(), fromIme=true)
+I/ImeTracker( 9230): com.example.hedieaty:2ec1e4af: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+I/ImeTracker( 9230): com.example.hedieaty:a6004b53: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager( 9230): showSoftInput() view=io.flutter.embedding.android.FlutterView{2055754 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+I/ImeTracker( 9230): com.example.hedieaty:7b5a23da: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager( 9230): showSoftInput() view=io.flutter.embedding.android.FlutterView{2055754 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+W/xample.hedieaty( 9230): ApkAssets: Deleting an ApkAssets object '<empty> and /product/app/talkback/talkback.apk' with 1 weak references
+W/xample.hedieaty( 9230): ApkAssets: Deleting an ApkAssets object '/vendor/overlay/EmulatorTalkBackOverlay/EmulatorTalkBackOverlay.apk' with 1 weak references
+D/InputConnectionAdaptor( 9230): The input method toggled cursor monitoring on
+D/InsetsController( 9230): show(ime(), fromIme=true)
+I/ImeTracker( 9230): com.example.hedieaty:a6004b53: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+D/InsetsController( 9230): show(ime(), fromIme=true)
+I/ImeTracker( 9230): com.example.hedieaty:7b5a23da: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+I/ImeTracker( 9230): com.example.hedieaty:7f61470f: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager( 9230): showSoftInput() view=io.flutter.embedding.android.FlutterView{2055754 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/InsetsController( 9230): show(ime(), fromIme=true)
+I/ImeTracker( 9230): com.example.hedieaty:7f61470f: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+I/flutter ( 9230): 🚀 Creating account...
+I/FirebaseAuth( 9230): Creating user with test_@example.com with empty reCAPTCHA token
+W/System  ( 9230): Ignoring header X-Firebase-Locale because its value was null.
+D/EGL_emulation( 9230): app_time_stats: avg=688.50ms min=668.21ms max=708.79ms count=2
+D/TrafficStats( 9230): tagSocket(156) with statsTag=0xffffffff, statsUid=-1
+E/RecaptchaCallWrapper( 9230): Initial task failed for action RecaptchaAction(action=signUpPassword)with exception - The email address is already in use by another account.
+D/EGL_emulation( 9230): app_time_stats: avg=1683.82ms min=51.45ms max=4946.66ms count=3
+I/flutter ( 9230): ✅ Account creation attempted
+I/flutter ( 9230): 🔑 Logging in...
+I/flutter ( 9230): ❌ Login error: Bad state: No element
+I/ImeTracker( 9230): com.example.hedieaty:99e94c72: onRequestHide at ORIGIN_CLIENT reason HIDE_SOFT_INPUT fromUser false
+I/flutter ( 9230): 00:13 +2: (tearDownAll)
+I/flutter ( 9230): 00:13 +3: All tests passed!
+All tests passed.
+D/InsetsController( 9230): hide(ime(), fromIme=true)
+D/EGL_emulation( 9230): app_time_stats: avg=391.35ms min=1.28ms max=6786.24ms count=19
+Stopping screen recording...
+Pulling the recorded file to local machine...
+/sdcard/app_test_recording.mp4: 1 file pulled, 0 skipped. 74.4 MB/s (2971617 bytes in 0.038s)
+Integration test passed. Logs saved in ./test_run_logs.txt. Recording saved as ./app_test_recording.mp4.
+Starting screen recording...
+Running integration test...
+Resolving dependencies...
+Downloading packages...
+  async 2.11.0 (2.12.0 available)
+  boolean_selector 2.1.1 (2.1.2 available)
+  characters 1.3.0 (1.4.0 available)
+  clock 1.1.1 (1.1.2 available)
+  collection 1.18.0 (1.19.1 available)
+  fake_async 1.3.1 (1.3.2 available)
+  file 7.0.0 (7.0.1 available)
+  http_parser 4.0.2 (4.1.1 available)
+  intl 0.19.0 (0.20.1 available)
+  leak_tracker 10.0.5 (10.0.8 available)
+  leak_tracker_flutter_testing 3.0.5 (3.0.9 available)
+  lints 5.0.0 (5.1.1 available)
+  logger 1.4.0 (2.5.0 available)
+  matcher 0.12.16+1 (0.12.17 available)
+  material_color_utilities 0.11.1 (0.12.0 available)
+  meta 1.15.0 (1.16.0 available)
+  path 1.9.0 (1.9.1 available)
+  platform 3.1.5 (3.1.6 available)
+  process 5.0.2 (5.0.3 available)
+  source_span 1.10.0 (1.10.1 available)
+  stack_trace 1.11.1 (1.12.1 available)
+  stream_channel 2.1.2 (2.1.3 available)
+  string_scanner 1.2.0 (1.4.1 available)
+  term_glyph 1.2.1 (1.2.2 available)
+  test_api 0.7.2 (0.7.4 available)
+  vm_service 14.2.5 (15.0.0 available)
+  webdriver 3.0.3 (3.0.4 available)
+Got dependencies!
+27 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+Running Gradle task 'assembleDebug'...                              4.0s
+✓ Built build/app/outputs/flutter-apk/app-debug.apk
+Installing build/app/outputs/flutter-apk/app-debug.apk...          875ms
+VMServiceFlutterDriver: Connecting to Flutter application at http://127.0.0.1:63186/Bffryj0WQyg=/
+VMServiceFlutterDriver: Isolate found with number: 8687630341524783
+VMServiceFlutterDriver: Isolate is paused at start.
+VMServiceFlutterDriver: Attempting to resume isolate
+I/flutter (10398): 00:00 +0: (setUpAll)
+VMServiceFlutterDriver: Connected to Flutter application.
+D/CompatChangeReporter(10398): Compat change id reported: 3400644; UID 10208; state: ENABLED
+I/flutter (10398): ✅ Firebase initialized successfully
+W/SQLiteLog(10398): (28) double-quoted string literal: "table"
+I/flutter (10398): 📊 Local SQLite Tables:
+I/flutter (10398):   - android_metadata
+I/flutter (10398):   - users
+I/flutter (10398):   - events
+I/flutter (10398):   - gifts
+I/flutter (10398):   - friends
+I/flutter (10398): ✅ Realtime Database connection validated
+I/flutter (10398): 00:00 +1: End-to-end test: User signup, login, and event creation Complete user journey test
+W/WindowOnBackDispatcher(10398): OnBackInvokedCallback is not enabled for the application.
+W/WindowOnBackDispatcher(10398): Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+I/flutter (10398): 📱 Starting application test flow...
+D/EGL_emulation(10398): app_time_stats: avg=1050.40ms min=921.90ms max=1178.91ms count=2
+D/ProfileInstaller(10398): Installing profile for com.example.hedieaty
+VMServiceFlutterDriver: request_data message is taking a long time to complete...
+I/flutter (10398): 🔄 Navigating to signup page...
+D/EGL_emulation(10398): app_time_stats: avg=3020.20ms min=3020.20ms max=3020.20ms count=1
+I/flutter (10398): ✍️ Filling signup form...
+I/ImeTracker(10398): com.example.hedieaty:edd06cb7: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(10398): showSoftInput() view=io.flutter.embedding.android.FlutterView{4c2b7dd VFE...... .F....ID 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+I/ImeTracker(10398): com.example.hedieaty:85a20c1a: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(10398): showSoftInput() view=io.flutter.embedding.android.FlutterView{4c2b7dd VFE...... .F....ID 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/EGL_emulation(10398): app_time_stats: avg=2999.79ms min=892.57ms max=5107.02ms count=2
+D/EGL_emulation(10398): app_time_stats: avg=163.99ms min=2.23ms max=436.47ms count=6
+I/ImeTracker(10398): com.example.hedieaty:ac82237: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(10398): showSoftInput() view=io.flutter.embedding.android.FlutterView{4c2b7dd VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/InputConnectionAdaptor(10398): The input method toggled cursor monitoring on
+D/InsetsController(10398): show(ime(), fromIme=true)
+W/InteractionJankMonitor(10398): Initializing without READ_DEVICE_CONFIG permission. enabled=false, interval=1, missedFrameThreshold=3, frameTimeThreshold=64, package=com.example.hedieaty
+I/ImeTracker(10398): com.example.hedieaty:ac82237: onShown
+I/ImeTracker(10398): com.example.hedieaty:bff47199: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(10398): showSoftInput() view=io.flutter.embedding.android.FlutterView{4c2b7dd VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+I/ImeTracker(10398): com.example.hedieaty:c50d235e: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(10398): showSoftInput() view=io.flutter.embedding.android.FlutterView{4c2b7dd VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/InputConnectionAdaptor(10398): The input method toggled cursor monitoring on
+I/ImeTracker(10398): com.example.hedieaty:7486af79: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(10398): showSoftInput() view=io.flutter.embedding.android.FlutterView{4c2b7dd VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+W/xample.hedieaty(10398): ApkAssets: Deleting an ApkAssets object '<empty> and /product/app/talkback/talkback.apk' with 1 weak references
+W/xample.hedieaty(10398): ApkAssets: Deleting an ApkAssets object '/vendor/overlay/EmulatorTalkBackOverlay/EmulatorTalkBackOverlay.apk' with 1 weak references
+D/InputConnectionAdaptor(10398): The input method toggled cursor monitoring off
+D/InputConnectionAdaptor(10398): The input method toggled cursor monitoring on
+D/InsetsController(10398): show(ime(), fromIme=true)
+I/ImeTracker(10398): com.example.hedieaty:bff47199: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+D/InsetsController(10398): show(ime(), fromIme=true)
+I/ImeTracker(10398): com.example.hedieaty:c50d235e: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+D/InsetsController(10398): show(ime(), fromIme=true)
+I/ImeTracker(10398): com.example.hedieaty:7486af79: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+I/ImeTracker(10398): com.example.hedieaty:939eaf41: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(10398): showSoftInput() view=io.flutter.embedding.android.FlutterView{4c2b7dd VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+I/ImeTracker(10398): com.example.hedieaty:c6e7e939: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(10398): showSoftInput() view=io.flutter.embedding.android.FlutterView{4c2b7dd VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/InputConnectionAdaptor(10398): The input method toggled cursor monitoring on
+D/InputConnectionAdaptor(10398): The input method toggled cursor monitoring off
+D/InputConnectionAdaptor(10398): The input method toggled cursor monitoring on
+I/ImeTracker(10398): com.example.hedieaty:ad59fd47: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(10398): showSoftInput() view=io.flutter.embedding.android.FlutterView{4c2b7dd VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/EGL_emulation(10398): app_time_stats: avg=625.73ms min=590.30ms max=661.15ms count=2
+D/InsetsController(10398): show(ime(), fromIme=true)
+I/ImeTracker(10398): com.example.hedieaty:939eaf41: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+D/InsetsController(10398): show(ime(), fromIme=true)
+I/ImeTracker(10398): com.example.hedieaty:c6e7e939: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+D/InsetsController(10398): show(ime(), fromIme=true)
+I/ImeTracker(10398): com.example.hedieaty:ad59fd47: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+I/flutter (10398): 🚀 Creating account...
+I/FirebaseAuth(10398): Creating user with test_@example.com with empty reCAPTCHA token
+W/System  (10398): Ignoring header X-Firebase-Locale because its value was null.
+D/TrafficStats(10398): tagSocket(160) with statsTag=0xffffffff, statsUid=-1
+W/System  (10398): Ignoring header X-Firebase-Locale because its value was null.
+D/FirebaseAuth(10398): Notifying id token listeners about user ( O1cNrbO8RrMqTcKMtWpzWRJnBGk1 ).
+D/FirebaseAuth(10398): Notifying auth state listeners about user ( O1cNrbO8RrMqTcKMtWpzWRJnBGk1 ).
+D/TrafficStats(10398): tagSocket(183) with statsTag=0xffffffff, statsUid=-1
+I/ImeTracker(10398): com.example.hedieaty:6bd120d7: onRequestHide at ORIGIN_CLIENT reason HIDE_SOFT_INPUT fromUser false
+D/InsetsController(10398): hide(ime(), fromIme=true)
+D/EGL_emulation(10398): app_time_stats: avg=167.85ms min=0.94ms max=3216.05ms count=21
+I/ImeTracker(10398): com.example.hedieaty:db387e69: onRequestHide at ORIGIN_CLIENT reason HIDE_SOFT_INPUT_ON_ANIMATION_STATE_CHANGED fromUser false
+I/ImeTracker(10398): com.example.hedieaty:6bd120d7: onHidden
+D/EGL_emulation(10398): app_time_stats: avg=1438.27ms min=37.93ms max=4995.98ms count=4
+I/flutter (10398): ✅ Account creation attempted
+I/flutter (10398): 🔑 Logging in...
+I/ImeTracker(10398): com.example.hedieaty:22d2bb70: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(10398): showSoftInput() view=io.flutter.embedding.android.FlutterView{4c2b7dd VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+I/ImeTracker(10398): com.example.hedieaty:11778d25: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(10398): showSoftInput() view=io.flutter.embedding.android.FlutterView{4c2b7dd VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/InputConnectionAdaptor(10398): The input method toggled cursor monitoring on
+I/ImeTracker(10398): com.example.hedieaty:e8a1a064: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(10398): showSoftInput() view=io.flutter.embedding.android.FlutterView{4c2b7dd VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/InsetsController(10398): show(ime(), fromIme=true)
+D/InsetsController(10398): show(ime(), fromIme=true)
+I/ImeTracker(10398): com.example.hedieaty:e8a1a064: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+D/EGL_emulation(10398): app_time_stats: avg=186.85ms min=12.25ms max=3452.23ms count=20
+I/ImeTracker(10398): com.example.hedieaty:11778d25: onShown
+I/ImeTracker(10398): com.example.hedieaty:bb356ff6: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(10398): showSoftInput() view=io.flutter.embedding.android.FlutterView{4c2b7dd VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+I/ImeTracker(10398): com.example.hedieaty:dcae2dfc: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(10398): showSoftInput() view=io.flutter.embedding.android.FlutterView{4c2b7dd VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/InputConnectionAdaptor(10398): The input method toggled cursor monitoring on
+D/InputConnectionAdaptor(10398): The input method toggled cursor monitoring off
+D/InputConnectionAdaptor(10398): The input method toggled cursor monitoring on
+D/EGL_emulation(10398): app_time_stats: avg=200.57ms min=35.21ms max=585.98ms count=5
+I/ImeTracker(10398): com.example.hedieaty:dadf83ae: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(10398): showSoftInput() view=io.flutter.embedding.android.FlutterView{4c2b7dd VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/InsetsController(10398): show(ime(), fromIme=true)
+I/ImeTracker(10398): com.example.hedieaty:bb356ff6: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+D/InsetsController(10398): show(ime(), fromIme=true)
+I/ImeTracker(10398): com.example.hedieaty:dadf83ae: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+I/FirebaseAuth(10398): Logging in as test_@example.com with empty reCAPTCHA token
+W/System  (10398): Ignoring header X-Firebase-Locale because its value was null.
+W/System  (10398): Ignoring header X-Firebase-Locale because its value was null.
+D/FirebaseAuth(10398): Notifying id token listeners about user ( O1cNrbO8RrMqTcKMtWpzWRJnBGk1 ).
+D/EGL_emulation(10398): app_time_stats: avg=263.64ms min=13.56ms max=591.79ms count=4
+I/flutter (10398): ✅ Login attempted
+I/flutter (10398): Retrieved 0 friends from remote
+I/flutter (10398): Loaded 0 friends
+I/flutter (10398): 📋 Navigating to Home page...
+I/flutter (10398): ❌ Home page verification error: Expected: exactly one matching candidate
+I/flutter (10398):   Actual: _TextContainingWidgetFinder:<Found 0 widgets with text containing Hedieaty: []>
+I/flutter (10398):    Which: means none were found but one was expected
+D/EGL_emulation(10398): app_time_stats: avg=435.13ms min=114.96ms max=1037.59ms count=3
+I/ImeTracker(10398): com.example.hedieaty:14e1c558: onRequestHide at ORIGIN_CLIENT reason HIDE_SOFT_INPUT fromUser false
+D/InsetsController(10398): hide(ime(), fromIme=true)
+I/flutter (10398): 00:16 +2: (tearDownAll)
+I/flutter (10398): 00:16 +3: All tests passed!
+All tests passed.
+D/EGL_emulation(10398): app_time_stats: avg=145.09ms min=9.41ms max=2643.31ms count=20
+Stopping screen recording...
+Pulling the recorded file to local machine...
+/sdcard/app_test_recording.mp4: 1 file pulled, 0 skipped. 102.3 MB/s (4070855 bytes in 0.038s)
+Integration test passed. Logs saved in ./test_run_logs.txt. Recording saved as ./app_test_recording.mp4.
+Starting screen recording...
+Running integration test...
+Resolving dependencies...
+Downloading packages...
+  async 2.11.0 (2.12.0 available)
+  boolean_selector 2.1.1 (2.1.2 available)
+  characters 1.3.0 (1.4.0 available)
+  clock 1.1.1 (1.1.2 available)
+  collection 1.18.0 (1.19.1 available)
+  fake_async 1.3.1 (1.3.2 available)
+  file 7.0.0 (7.0.1 available)
+  http_parser 4.0.2 (4.1.1 available)
+  intl 0.19.0 (0.20.1 available)
+  leak_tracker 10.0.5 (10.0.8 available)
+  leak_tracker_flutter_testing 3.0.5 (3.0.9 available)
+  lints 5.0.0 (5.1.1 available)
+  logger 1.4.0 (2.5.0 available)
+  matcher 0.12.16+1 (0.12.17 available)
+  material_color_utilities 0.11.1 (0.12.0 available)
+  meta 1.15.0 (1.16.0 available)
+  path 1.9.0 (1.9.1 available)
+  platform 3.1.5 (3.1.6 available)
+  process 5.0.2 (5.0.3 available)
+  source_span 1.10.0 (1.10.1 available)
+  stack_trace 1.11.1 (1.12.1 available)
+  stream_channel 2.1.2 (2.1.3 available)
+  string_scanner 1.2.0 (1.4.1 available)
+  term_glyph 1.2.1 (1.2.2 available)
+  test_api 0.7.2 (0.7.4 available)
+  vm_service 14.2.5 (15.0.0 available)
+  webdriver 3.0.3 (3.0.4 available)
+Got dependencies!
+27 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+Running Gradle task 'assembleDebug'...                              7.6s
+✓ Built build/app/outputs/flutter-apk/app-debug.apk
+Installing build/app/outputs/flutter-apk/app-debug.apk...          969ms
+
+Oops; flutter has exited unexpectedly: "getVM: (-32000) Service connection disposed".
+Stopping screen recording...
+Pulling the recorded file to local machine...
+/sdcard/app_test_recording.mp4: 1 file pulled, 0 skipped. 86.1 MB/s (755759 bytes in 0.008s)
+Integration test passed. Logs saved in ./test_run_logs.txt. Recording saved as ./app_test_recording.mp4.
+Starting screen recording...
+Running integration test...
+Resolving dependencies...
+Downloading packages...
+  async 2.11.0 (2.12.0 available)
+  boolean_selector 2.1.1 (2.1.2 available)
+  characters 1.3.0 (1.4.0 available)
+  clock 1.1.1 (1.1.2 available)
+  collection 1.18.0 (1.19.1 available)
+  fake_async 1.3.1 (1.3.2 available)
+  file 7.0.0 (7.0.1 available)
+  http_parser 4.0.2 (4.1.1 available)
+  intl 0.19.0 (0.20.1 available)
+  leak_tracker 10.0.5 (10.0.8 available)
+  leak_tracker_flutter_testing 3.0.5 (3.0.9 available)
+  lints 5.0.0 (5.1.1 available)
+  logger 1.4.0 (2.5.0 available)
+  matcher 0.12.16+1 (0.12.17 available)
+  material_color_utilities 0.11.1 (0.12.0 available)
+  meta 1.15.0 (1.16.0 available)
+  path 1.9.0 (1.9.1 available)
+  platform 3.1.5 (3.1.6 available)
+  process 5.0.2 (5.0.3 available)
+  source_span 1.10.0 (1.10.1 available)
+  stack_trace 1.11.1 (1.12.1 available)
+  stream_channel 2.1.2 (2.1.3 available)
+  string_scanner 1.2.0 (1.4.1 available)
+  term_glyph 1.2.1 (1.2.2 available)
+  test_api 0.7.2 (0.7.4 available)
+  vm_service 14.2.5 (15.0.0 available)
+  webdriver 3.0.3 (3.0.4 available)
+Got dependencies!
+27 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+Running Gradle task 'assembleDebug'...                           2,966ms
+✓ Built build/app/outputs/flutter-apk/app-debug.apk
+VMServiceFlutterDriver: Connecting to Flutter application at http://127.0.0.1:63801/RpL3eZXMxcw=/
+VMServiceFlutterDriver: Isolate found with number: 6023187383895155
+VMServiceFlutterDriver: Isolate is paused at start.
+VMServiceFlutterDriver: Attempting to resume isolate
+I/flutter (12424): 00:00 +0: (setUpAll)
+VMServiceFlutterDriver: Connected to Flutter application.
+D/CompatChangeReporter(12424): Compat change id reported: 3400644; UID 10209; state: ENABLED
+I/flutter (12424): ✅ Firebase initialized successfully
+W/SQLiteLog(12424): (28) double-quoted string literal: "table"
+I/flutter (12424): 📊 Local SQLite Tables:
+I/flutter (12424):   - android_metadata
+I/flutter (12424):   - users
+I/flutter (12424):   - events
+I/flutter (12424):   - gifts
+I/flutter (12424):   - friends
+I/flutter (12424): ✅ Realtime Database connection validated
+I/flutter (12424): 00:00 +1: End-to-end test: User signup, login, and event creation Complete user journey test
+W/WindowOnBackDispatcher(12424): OnBackInvokedCallback is not enabled for the application.
+W/WindowOnBackDispatcher(12424): Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+I/flutter (12424): 📱 Starting application test flow...
+D/EGL_emulation(12424): app_time_stats: avg=992.46ms min=813.92ms max=1171.00ms count=2
+D/ProfileInstaller(12424): Installing profile for com.example.hedieaty
+VMServiceFlutterDriver: request_data message is taking a long time to complete...
+I/flutter (12424): 🔄 Navigating to signup page...
+D/EGL_emulation(12424): app_time_stats: avg=3017.95ms min=3017.95ms max=3017.95ms count=1
+I/flutter (12424): ✍️ Filling signup form...
+I/ImeTracker(12424): com.example.hedieaty:bcb64afe: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(12424): showSoftInput() view=io.flutter.embedding.android.FlutterView{e6c1fc1 VFE...... .F....ID 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+I/ImeTracker(12424): com.example.hedieaty:5a82813c: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(12424): showSoftInput() view=io.flutter.embedding.android.FlutterView{e6c1fc1 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/EGL_emulation(12424): app_time_stats: avg=2931.63ms min=777.41ms max=5085.85ms count=2
+D/InputConnectionAdaptor(12424): The input method toggled cursor monitoring on
+I/ImeTracker(12424): com.example.hedieaty:fdb08cd5: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(12424): showSoftInput() view=io.flutter.embedding.android.FlutterView{e6c1fc1 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/InsetsController(12424): show(ime(), fromIme=true)
+W/InteractionJankMonitor(12424): Initializing without READ_DEVICE_CONFIG permission. enabled=false, interval=1, missedFrameThreshold=3, frameTimeThreshold=64, package=com.example.hedieaty
+D/InsetsController(12424): show(ime(), fromIme=true)
+I/ImeTracker(12424): com.example.hedieaty:fdb08cd5: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+I/ImeTracker(12424): com.example.hedieaty:5a82813c: onShown
+I/ImeTracker(12424): com.example.hedieaty:8ef225d8: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(12424): showSoftInput() view=io.flutter.embedding.android.FlutterView{e6c1fc1 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+I/ImeTracker(12424): com.example.hedieaty:7aa9c2bc: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(12424): showSoftInput() view=io.flutter.embedding.android.FlutterView{e6c1fc1 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/InputConnectionAdaptor(12424): The input method toggled cursor monitoring on
+D/EGL_emulation(12424): app_time_stats: avg=236.02ms min=1.99ms max=670.97ms count=7
+I/ImeTracker(12424): com.example.hedieaty:a40537: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(12424): showSoftInput() view=io.flutter.embedding.android.FlutterView{e6c1fc1 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/InputConnectionAdaptor(12424): The input method toggled cursor monitoring off
+D/InputConnectionAdaptor(12424): The input method toggled cursor monitoring on
+D/InsetsController(12424): show(ime(), fromIme=true)
+I/ImeTracker(12424): com.example.hedieaty:8ef225d8: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+D/InsetsController(12424): show(ime(), fromIme=true)
+I/ImeTracker(12424): com.example.hedieaty:7aa9c2bc: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+D/InsetsController(12424): show(ime(), fromIme=true)
+I/ImeTracker(12424): com.example.hedieaty:a40537: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+I/ImeTracker(12424): com.example.hedieaty:3279cf24: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(12424): showSoftInput() view=io.flutter.embedding.android.FlutterView{e6c1fc1 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+I/ImeTracker(12424): com.example.hedieaty:721b4798: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(12424): showSoftInput() view=io.flutter.embedding.android.FlutterView{e6c1fc1 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/InputConnectionAdaptor(12424): The input method toggled cursor monitoring on
+D/InputConnectionAdaptor(12424): The input method toggled cursor monitoring off
+D/InputConnectionAdaptor(12424): The input method toggled cursor monitoring on
+I/ImeTracker(12424): com.example.hedieaty:274a0d5f: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(12424): showSoftInput() view=io.flutter.embedding.android.FlutterView{e6c1fc1 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/InsetsController(12424): show(ime(), fromIme=true)
+I/ImeTracker(12424): com.example.hedieaty:3279cf24: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+D/InsetsController(12424): show(ime(), fromIme=true)
+I/ImeTracker(12424): com.example.hedieaty:721b4798: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+D/InsetsController(12424): show(ime(), fromIme=true)
+I/ImeTracker(12424): com.example.hedieaty:274a0d5f: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+W/xample.hedieaty(12424): ApkAssets: Deleting an ApkAssets object '<empty> and /product/app/talkback/talkback.apk' with 1 weak references
+W/xample.hedieaty(12424): ApkAssets: Deleting an ApkAssets object '/vendor/overlay/EmulatorTalkBackOverlay/EmulatorTalkBackOverlay.apk' with 1 weak references
+I/flutter (12424): 🚀 Creating account...
+I/FirebaseAuth(12424): Creating user with test1_@example.com with empty reCAPTCHA token
+W/System  (12424): Ignoring header X-Firebase-Locale because its value was null.
+D/TrafficStats(12424): tagSocket(5) with statsTag=0xffffffff, statsUid=-1
+D/EGL_emulation(12424): app_time_stats: avg=656.80ms min=596.54ms max=717.07ms count=2
+W/System  (12424): Ignoring header X-Firebase-Locale because its value was null.
+D/FirebaseAuth(12424): Notifying id token listeners about user ( iqhtnZ4DWlZhsyqwUd45z4RFB4C3 ).
+D/FirebaseAuth(12424): Notifying auth state listeners about user ( iqhtnZ4DWlZhsyqwUd45z4RFB4C3 ).
+D/TrafficStats(12424): tagSocket(189) with statsTag=0xffffffff, statsUid=-1
+I/ImeTracker(12424): com.example.hedieaty:eb91bde8: onRequestHide at ORIGIN_CLIENT reason HIDE_SOFT_INPUT fromUser false
+D/InsetsController(12424): hide(ime(), fromIme=true)
+D/EGL_emulation(12424): app_time_stats: avg=171.20ms min=0.86ms max=3282.57ms count=21
+I/ImeTracker(12424): com.example.hedieaty:c53039eb: onRequestHide at ORIGIN_CLIENT reason HIDE_SOFT_INPUT_ON_ANIMATION_STATE_CHANGED fromUser false
+I/ImeTracker(12424): com.example.hedieaty:eb91bde8: onHidden
+D/EGL_emulation(12424): app_time_stats: avg=1682.20ms min=57.10ms max=4930.92ms count=3
+I/flutter (12424): ✅ Account creation attempted
+I/flutter (12424): 🔑 Logging in...
+I/ImeTracker(12424): com.example.hedieaty:2fd009fb: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(12424): showSoftInput() view=io.flutter.embedding.android.FlutterView{e6c1fc1 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+I/ImeTracker(12424): com.example.hedieaty:c61edfc8: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(12424): showSoftInput() view=io.flutter.embedding.android.FlutterView{e6c1fc1 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/InputConnectionAdaptor(12424): The input method toggled cursor monitoring on
+I/ImeTracker(12424): com.example.hedieaty:b45543ec: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(12424): showSoftInput() view=io.flutter.embedding.android.FlutterView{e6c1fc1 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/InsetsController(12424): show(ime(), fromIme=true)
+D/InsetsController(12424): show(ime(), fromIme=true)
+I/ImeTracker(12424): com.example.hedieaty:b45543ec: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+D/EGL_emulation(12424): app_time_stats: avg=184.50ms min=13.04ms max=3417.38ms count=20
+I/ImeTracker(12424): com.example.hedieaty:c61edfc8: onShown
+I/ImeTracker(12424): com.example.hedieaty:51f650d5: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(12424): showSoftInput() view=io.flutter.embedding.android.FlutterView{e6c1fc1 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+I/ImeTracker(12424): com.example.hedieaty:7001d9d2: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(12424): showSoftInput() view=io.flutter.embedding.android.FlutterView{e6c1fc1 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/InputConnectionAdaptor(12424): The input method toggled cursor monitoring on
+D/InputConnectionAdaptor(12424): The input method toggled cursor monitoring off
+D/InputConnectionAdaptor(12424): The input method toggled cursor monitoring on
+I/ImeTracker(12424): com.example.hedieaty:24ba1542: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(12424): showSoftInput() view=io.flutter.embedding.android.FlutterView{e6c1fc1 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/EGL_emulation(12424): app_time_stats: avg=202.98ms min=51.61ms max=582.70ms count=5
+D/InsetsController(12424): show(ime(), fromIme=true)
+I/ImeTracker(12424): com.example.hedieaty:24ba1542: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+I/FirebaseAuth(12424): Logging in as test1_@example.com with empty reCAPTCHA token
+W/System  (12424): Ignoring header X-Firebase-Locale because its value was null.
+W/System  (12424): Ignoring header X-Firebase-Locale because its value was null.
+D/FirebaseAuth(12424): Notifying id token listeners about user ( iqhtnZ4DWlZhsyqwUd45z4RFB4C3 ).
+D/EGL_emulation(12424): app_time_stats: avg=263.60ms min=15.58ms max=573.75ms count=4
+I/flutter (12424): Retrieved 0 friends from remote
+I/flutter (12424): Loaded 0 friends
+I/ImeTracker(12424): com.example.hedieaty:70306f84: onRequestHide at ORIGIN_CLIENT reason HIDE_SOFT_INPUT fromUser false
+D/InsetsController(12424): hide(ime(), fromIme=true)
+D/EGL_emulation(12424): app_time_stats: avg=100.10ms min=12.48ms max=1720.31ms count=20
+I/ImeTracker(12424): com.example.hedieaty:fdcb6a49: onRequestHide at ORIGIN_CLIENT reason HIDE_SOFT_INPUT_ON_ANIMATION_STATE_CHANGED fromUser false
+I/ImeTracker(12424): com.example.hedieaty:70306f84: onHidden
+I/flutter (12424): ✅ Login attempted
+I/flutter (12424): 📋 Navigating to Home page...
+I/flutter (12424): ✅ Home page loaded successfully
+I/flutter (12424): 📋 Navigating to Events page...
+D/EGL_emulation(12424): app_time_stats: avg=569.22ms min=121.48ms max=2606.25ms count=6
+D/EGL_emulation(12424): app_time_stats: avg=529.88ms min=20.53ms max=1539.97ms count=3
+I/flutter (12424): ➕ Creating new event...
+D/EGL_emulation(12424): app_time_stats: avg=455.67ms min=109.16ms max=1143.81ms count=3
+I/flutter (12424): 📝 Filling event details...
+D/EGL_emulation(12424): app_time_stats: avg=511.43ms min=18.51ms max=1487.06ms count=3
+I/ImeTracker(12424): com.example.hedieaty:7cc0560a: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(12424): showSoftInput() view=io.flutter.embedding.android.FlutterView{e6c1fc1 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+I/ImeTracker(12424): com.example.hedieaty:9684f22f: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(12424): showSoftInput() view=io.flutter.embedding.android.FlutterView{e6c1fc1 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+I/ImeTracker(12424): com.example.hedieaty:612c3a5a: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(12424): showSoftInput() view=io.flutter.embedding.android.FlutterView{e6c1fc1 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/InputConnectionAdaptor(12424): The input method toggled cursor monitoring on
+D/InsetsController(12424): show(ime(), fromIme=true)
+D/EGL_emulation(12424): app_time_stats: avg=377.87ms min=8.47ms max=7286.93ms count=20
+I/ImeTracker(12424): com.example.hedieaty:612c3a5a: onShown
+I/ImeTracker(12424): com.example.hedieaty:50e7660a: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(12424): showSoftInput() view=io.flutter.embedding.android.FlutterView{e6c1fc1 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+I/ImeTracker(12424): com.example.hedieaty:143fe8f7: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(12424): showSoftInput() view=io.flutter.embedding.android.FlutterView{e6c1fc1 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/InputConnectionAdaptor(12424): The input method toggled cursor monitoring on
+D/EGL_emulation(12424): app_time_stats: avg=828.70ms min=57.46ms max=1599.95ms count=2
+I/ImeTracker(12424): com.example.hedieaty:357a64e4: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(12424): showSoftInput() view=io.flutter.embedding.android.FlutterView{e6c1fc1 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/InputConnectionAdaptor(12424): The input method toggled cursor monitoring off
+D/InputConnectionAdaptor(12424): The input method toggled cursor monitoring on
+D/InsetsController(12424): show(ime(), fromIme=true)
+I/ImeTracker(12424): com.example.hedieaty:50e7660a: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+D/InsetsController(12424): show(ime(), fromIme=true)
+I/ImeTracker(12424): com.example.hedieaty:143fe8f7: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+D/InsetsController(12424): show(ime(), fromIme=true)
+I/ImeTracker(12424): com.example.hedieaty:357a64e4: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+I/ImeTracker(12424): com.example.hedieaty:15a5f851: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(12424): showSoftInput() view=io.flutter.embedding.android.FlutterView{e6c1fc1 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+I/ImeTracker(12424): com.example.hedieaty:efa41c51: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(12424): showSoftInput() view=io.flutter.embedding.android.FlutterView{e6c1fc1 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/InputConnectionAdaptor(12424): The input method toggled cursor monitoring on
+D/EGL_emulation(12424): app_time_stats: avg=1605.28ms min=1605.28ms max=1605.28ms count=1
+I/ImeTracker(12424): com.example.hedieaty:135200a4: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(12424): showSoftInput() view=io.flutter.embedding.android.FlutterView{e6c1fc1 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/InputConnectionAdaptor(12424): The input method toggled cursor monitoring off
+D/InputConnectionAdaptor(12424): The input method toggled cursor monitoring on
+D/InsetsController(12424): show(ime(), fromIme=true)
+I/ImeTracker(12424): com.example.hedieaty:efa41c51: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+D/InsetsController(12424): show(ime(), fromIme=true)
+I/ImeTracker(12424): com.example.hedieaty:135200a4: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+I/flutter (12424): 📅 Selecting date...
+I/ImeTracker(12424): com.example.hedieaty:5a60d1dc: onRequestHide at ORIGIN_CLIENT reason HIDE_SOFT_INPUT fromUser false
+D/EGL_emulation(12424): app_time_stats: avg=1701.68ms min=1701.68ms max=1701.68ms count=1
+D/InsetsController(12424): hide(ime(), fromIme=true)
+D/EGL_emulation(12424): app_time_stats: avg=241.59ms min=5.46ms max=4566.99ms count=20
+I/ImeTracker(12424): com.example.hedieaty:9e6c7f48: onRequestHide at ORIGIN_CLIENT reason HIDE_SOFT_INPUT_ON_ANIMATION_STATE_CHANGED fromUser false
+I/ImeTracker(12424): com.example.hedieaty:5a60d1dc: onHidden
+I/ImeTracker(12424): com.example.hedieaty:b460162c: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(12424): showSoftInput() view=io.flutter.embedding.android.FlutterView{e6c1fc1 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/InputConnectionAdaptor(12424): The input method toggled cursor monitoring on
+D/InsetsController(12424): show(ime(), fromIme=true)
+I/ImeTracker(12424): com.example.hedieaty:b460162c: onShown
+D/EGL_emulation(12424): app_time_stats: avg=157.21ms min=21.15ms max=450.12ms count=7
+I/flutter (12424): 💾 Saving event...
+I/ImeTracker(12424): com.example.hedieaty:41edceb1: onRequestHide at ORIGIN_CLIENT reason HIDE_SOFT_INPUT fromUser false
+D/InsetsController(12424): hide(ime(), fromIme=true)
+D/EGL_emulation(12424): app_time_stats: avg=596.77ms min=120.26ms max=1073.29ms count=2
+D/EGL_emulation(12424): app_time_stats: avg=54.17ms min=7.39ms max=1435.20ms count=40
+W/FirebaseDatabase(12424): Assertion failed: View does not exist but we have a tag
+I/ImeTracker(12424): com.example.hedieaty:a5e696bd: onRequestHide at ORIGIN_CLIENT reason HIDE_SOFT_INPUT_ON_ANIMATION_STATE_CHANGED fromUser false
+I/ImeTracker(12424): com.example.hedieaty:41edceb1: onHidden
+D/EGL_emulation(12424): app_time_stats: avg=2392.62ms min=21.87ms max=7132.51ms count=3
+I/flutter (12424): ✅ Verifying event creation...
+I/flutter (12424): ✅ Event created successfully
+I/flutter (12424): 🔗 Navigating to events gifts...
+I/flutter (12424): Gift list rebuild. Gifts count: 0
+D/EGL_emulation(12424): app_time_stats: avg=591.07ms min=119.88ms max=1062.25ms count=2
+I/flutter (12424): Gift list rebuild. Gifts count: 0
+I/flutter (12424): Gift list rebuild. Gifts count: 0
+I/flutter (12424): ➕ Creating new gift...
+D/EGL_emulation(12424): app_time_stats: avg=349.97ms min=14.72ms max=1073.83ms count=5
+D/EGL_emulation(12424): app_time_stats: avg=351.03ms min=0.98ms max=1022.75ms count=3
+I/flutter (12424): 📝 Filling gift details...
+I/ImeTracker(12424): com.example.hedieaty:fb8d930c: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(12424): showSoftInput() view=io.flutter.embedding.android.FlutterView{e6c1fc1 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+I/ImeTracker(12424): com.example.hedieaty:72d715c8: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(12424): showSoftInput() view=io.flutter.embedding.android.FlutterView{e6c1fc1 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/InputConnectionAdaptor(12424): The input method toggled cursor monitoring on
+I/ImeTracker(12424): com.example.hedieaty:33fd0781: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(12424): showSoftInput() view=io.flutter.embedding.android.FlutterView{e6c1fc1 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/InsetsController(12424): show(ime(), fromIme=true)
+D/EGL_emulation(12424): app_time_stats: avg=569.85ms min=9.62ms max=11109.12ms count=20
+D/InsetsController(12424): show(ime(), fromIme=true)
+I/ImeTracker(12424): com.example.hedieaty:33fd0781: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+I/ImeTracker(12424): com.example.hedieaty:72d715c8: onShown
+I/ImeTracker(12424): com.example.hedieaty:39665088: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(12424): showSoftInput() view=io.flutter.embedding.android.FlutterView{e6c1fc1 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+I/ImeTracker(12424): com.example.hedieaty:e3b4c0f3: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(12424): showSoftInput() view=io.flutter.embedding.android.FlutterView{e6c1fc1 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/InputConnectionAdaptor(12424): The input method toggled cursor monitoring on
+D/EGL_emulation(12424): app_time_stats: avg=603.79ms min=109.11ms max=1098.48ms count=2
+I/ImeTracker(12424): com.example.hedieaty:3b7d1524: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(12424): showSoftInput() view=io.flutter.embedding.android.FlutterView{e6c1fc1 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/InputConnectionAdaptor(12424): The input method toggled cursor monitoring off
+D/InputConnectionAdaptor(12424): The input method toggled cursor monitoring on
+D/InsetsController(12424): show(ime(), fromIme=true)
+I/ImeTracker(12424): com.example.hedieaty:39665088: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+D/InsetsController(12424): show(ime(), fromIme=true)
+I/ImeTracker(12424): com.example.hedieaty:e3b4c0f3: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+D/InsetsController(12424): show(ime(), fromIme=true)
+I/ImeTracker(12424): com.example.hedieaty:3b7d1524: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+I/ImeTracker(12424): com.example.hedieaty:416b14ff: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(12424): showSoftInput() view=io.flutter.embedding.android.FlutterView{e6c1fc1 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+I/ImeTracker(12424): com.example.hedieaty:e7605512: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(12424): showSoftInput() view=io.flutter.embedding.android.FlutterView{e6c1fc1 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/InputConnectionAdaptor(12424): The input method toggled cursor monitoring on
+D/EGL_emulation(12424): app_time_stats: avg=1097.12ms min=1097.12ms max=1097.12ms count=1
+I/ImeTracker(12424): com.example.hedieaty:77d1c86c: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(12424): showSoftInput() view=io.flutter.embedding.android.FlutterView{e6c1fc1 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/InputConnectionAdaptor(12424): The input method toggled cursor monitoring off
+D/InputConnectionAdaptor(12424): The input method toggled cursor monitoring on
+D/InsetsController(12424): show(ime(), fromIme=true)
+I/ImeTracker(12424): com.example.hedieaty:416b14ff: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+D/InsetsController(12424): show(ime(), fromIme=true)
+I/ImeTracker(12424): com.example.hedieaty:e7605512: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+D/InsetsController(12424): show(ime(), fromIme=true)
+I/ImeTracker(12424): com.example.hedieaty:77d1c86c: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+I/ImeTracker(12424): com.example.hedieaty:3a6ec29: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(12424): showSoftInput() view=io.flutter.embedding.android.FlutterView{e6c1fc1 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+I/ImeTracker(12424): com.example.hedieaty:6fd9b644: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(12424): showSoftInput() view=io.flutter.embedding.android.FlutterView{e6c1fc1 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/InputConnectionAdaptor(12424): The input method toggled cursor monitoring on
+D/InputConnectionAdaptor(12424): The input method toggled cursor monitoring off
+D/InputConnectionAdaptor(12424): The input method toggled cursor monitoring on
+D/InsetsController(12424): show(ime(), fromIme=true)
+I/ImeTracker(12424): com.example.hedieaty:6fd9b644: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+D/EGL_emulation(12424): app_time_stats: avg=1100.51ms min=1100.51ms max=1100.51ms count=1
+I/ImeTracker(12424): com.example.hedieaty:b51a4cc0: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+D/InputMethodManager(12424): showSoftInput() view=io.flutter.embedding.android.FlutterView{e6c1fc1 VFE...... .F...... 0,0-1080,2337 #1 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+D/InsetsController(12424): show(ime(), fromIme=true)
+I/ImeTracker(12424): com.example.hedieaty:b51a4cc0: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+I/flutter (12424): 💾 Saving gift...
+D/EGL_emulation(12424): app_time_stats: avg=1562.34ms min=1562.34ms max=1562.34ms count=1
+W/FirebaseDatabase(12424): Assertion failed: View does not exist but we have a tag
+I/flutter (12424): Successfully cleared gifts for eventId: -OE_uTyZhPGWg_5Aq3MZ
+I/flutter (12424): Gift added successfully: Teddy Bear
+I/ImeTracker(12424): com.example.hedieaty:124845ef: onRequestHide at ORIGIN_CLIENT reason HIDE_SOFT_INPUT fromUser false
+D/InsetsController(12424): hide(ime(), fromIme=true)
+D/EGL_emulation(12424): app_time_stats: avg=243.02ms min=0.73ms max=4768.42ms count=20
+I/ImeTracker(12424): com.example.hedieaty:8afc4e73: onRequestHide at ORIGIN_CLIENT reason HIDE_SOFT_INPUT_ON_ANIMATION_STATE_CHANGED fromUser false
+I/ImeTracker(12424): com.example.hedieaty:124845ef: onHidden
+I/flutter (12424): Gift list rebuild. Gifts count: 1
+D/EGL_emulation(12424): app_time_stats: avg=2400.00ms min=15.35ms max=7158.70ms count=3
+I/flutter (12424): ✅ Verifying gift creation...
+I/flutter (12424): ✅ Gift added successfully
+I/flutter (12424): 00:56 +2: (tearDownAll)
+I/flutter (12424): 00:56 +3: All tests passed!
+All tests passed.
+Stopping screen recording...
+Pulling the recorded file to the local machine...
+/sdcard/app_test_recording.mp4: 1 file pulled, 0 skipped. 245.0 MB/s (7034584 bytes in 0.027s)
+Verifying the recording file integrity...
+Error: Recording file is corrupted. Logs saved in ./test_run_logs.txt.

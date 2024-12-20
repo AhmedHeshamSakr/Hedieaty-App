@@ -1,30 +1,91 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
+import 'package:flutter/material.dart';
 import 'package:hedieaty/main.dart';
+import 'package:integration_test/integration_test.dart';
+
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const HedieatyApp());
+  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  group('End-to-end test: User signup, login, and event creation', () {
+    testWidgets('Complete user journey test', (tester) async {
+      // Launch the app
+      await tester.pumpWidget( HedieatyApp());
+      await tester.pumpAndSettle();
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+      // Step 1: Navigate to signup page and create account
+      await tester.tap(find.text("Don't have an account? Sign Up"));
+      await tester.pumpAndSettle();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+      // Fill in signup form
+      await tester.enterText(
+          find.widgetWithText(TextFormField, 'Full Name'),
+          'Test User'
+      );
+      await tester.enterText(
+          find.widgetWithText(TextFormField, 'Email Address'),
+          'test@example.com'
+      );
+      await tester.enterText(
+          find.widgetWithText(TextFormField, 'Password'),
+          'Test123!'
+      );
+
+      // Submit signup form
+      await tester.tap(find.text('Create Account'));
+      await tester.pumpAndSettle();
+
+      // Step 2: Login with created credentials
+      await tester.enterText(
+          find.widgetWithText(TextFormField, 'Email'),
+          'test@example.com'
+      );
+      await tester.enterText(
+          find.widgetWithText(TextFormField, 'Password'),
+          'Test123!'
+      );
+
+      await tester.tap(find.text('Login'));
+      await tester.pumpAndSettle();
+
+      // Verify we're on the home page
+      expect(find.text('Welcome, Test User'), findsOneWidget);
+
+      // Step 3: Navigate to event list
+      await tester.tap(find.text('Events'));
+      await tester.pumpAndSettle();
+
+      // Step 4: Tap add event button
+      await tester.tap(find.text('Add Event'));
+      await tester.pumpAndSettle();
+
+      // Step 5: Fill in event details
+      await tester.enterText(
+          find.widgetWithText(TextFormField, 'Event Name'),
+          'Test Event'
+      );
+      await tester.enterText(
+          find.widgetWithText(TextFormField, 'Location'),
+          'Test Location'
+      );
+      await tester.enterText(
+          find.widgetWithText(TextFormField, 'Description'),
+          'Test Description'
+      );
+
+      // Select date
+      await tester.tap(find.text('Select a date'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('OK'));
+      await tester.pumpAndSettle();
+
+      // Create the event
+      await tester.tap(find.text('Create'));
+      await tester.pumpAndSettle();
+
+      // Verify the event was added to the list
+      expect(find.text('Test Event'), findsOneWidget);
+      expect(find.text('Test Location'), findsOneWidget);
+    });
   });
 }

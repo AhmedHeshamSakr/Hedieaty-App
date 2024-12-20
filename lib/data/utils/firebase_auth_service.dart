@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'dart:convert';
-
 import '../../core/utils/validators.dart';
 import '../local/datasources/sqlite_user_datasource.dart';
 import '../models/user_model.dart';

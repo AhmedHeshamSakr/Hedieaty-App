@@ -25,6 +25,19 @@ class SqliteUserDatasource {
   Future<void> insertUser(UserModel user) async {
     await db.insert('users', user.toJson(), conflictAlgorithm: ConflictAlgorithm.replace);
   }
+
+  Future<void> insertOrUpdateUser(Map<String, dynamic> userData) async {
+    await db.insert(
+      'users',
+      {
+        'id': userData['id'],
+        'name': userData['name'] ?? 'Unknown',
+        'email': userData['email'] ?? '',
+        'preferences': userData['preferences'] ?? '{}',
+      },
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
   Future<void> updateUser(UserModel user) async {
     await db.update('users', user.toJson(), where: 'id = ?', whereArgs: [user.id]);
   }

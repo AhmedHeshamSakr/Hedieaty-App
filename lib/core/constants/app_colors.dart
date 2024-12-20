@@ -1,42 +1,46 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  // Gift-themed primary colors
-  static const Color primary = Color(0xFFFF6B9E); // Soft, happy pink
-  static const Color primaryVariant = Color(0xFFFF4081); // Slightly deeper pink
-  static const Color secondary = Color(0xFF4ECDC4); // Fresh, modern teal
-  static const Color secondaryVariant = Color(0xFF45B7D1); // Lighter teal
+  // Primary colors - Bright, cheerful sky blue as our foundation
+  static const Color primary = Color(0xFF4DABF7);       // Vibrant sky blue - like a clear summer day
+  static const Color primaryVariant = Color(0xFF339AF0); // Slightly deeper sky blue
+  static const Color secondary = Color(0xFF51CF66);     // Fresh spring green - represents growth
+  static const Color secondaryVariant = Color(0xFF40C057); // Deeper spring green
 
-  // Background colors
-  static const Color background = Color(0xFFFFF5F5); // Soft, warm white with a hint of pink
-  static const Color surface = Color(0xFFFFF0F5); // Light pink surface
+  // Background colors - Clean, bright foundation
+  static const Color background = Color(0xFFF8F9FA);    // Crisp, fresh white with slight warmth
+  static const Color surface = Color(0xFFFFFFFF);       // Pure white for maximum clarity
 
-  // Text colors
-  static const Color onPrimary = Color(0xFFFFFFFF); // White
-  static const Color onSecondary = Color(0xFFFFFFFF); // White
-  static const Color onBackground = Color(0xFF333333); // Soft black
-  static const Color onSurface = Color(0xFF444444); // Slightly lighter black
+  // Text colors - Friendly but readable
+  static const Color onPrimary = Color(0xFFFFFFFF);     // White
+  static const Color onSecondary = Color(0xFFFFFFFF);   // White
+  static const Color onBackground = Color(0xFF495057);  // Warm gray, friendlier than pure black
+  static const Color onSurface = Color(0xFF868E96);     // Medium warm gray for secondary text
 
-  // Error colors
-  static const Color error = Color(0xFFF44336); // Vibrant red
-  static const Color onError = Color(0xFFFFFFFF);
+  // Status colors - Optimistic and friendly
+  static const Color error = Color(0xFFFFA8A8);         // Soft coral red - less harsh
+  static const Color success = Color(0xFF69DB7C);       // Fresh mint green
+  static const Color warning = Color(0xFFFFD43B);       // Cheerful yellow
+  static const Color info = Color(0xFF74C0FC);          // Light sky blue
+  static const Color onError = Color(0xFF495057);       // Dark gray for error text
+  static const Color onSuccess = Color(0xFF495057);     // Dark gray for success text
 
-  // Additional states
-  static const Color disabled = Color(0xFFE0E0E0); // Light gray
-  static const Color focused = Color(0xFFFF6B9E); // Same as primary
-  static const Color hint = Color(0xFF9E9E9E); // Soft gray
-  static const Color overlay = Color(0x66000000); // Semi-transparent black
-  static const Color divider = Color(0xFFE0E0E0); // Light divider
+  // Interactive states - Playful but clear
+  static const Color disabled = Color(0xFFE9ECEF);      // Light gray with warmth
+  static const Color focused = Color(0xFF74C0FC);       // Bright blue for focus
+  static const Color hint = Color(0xFFADB5BD);          // Warm medium gray
+  static const Color overlay = Color(0x66495057);       // Semi-transparent gray
+  static const Color divider = Color(0xFFE9ECEF);       // Subtle warm gray divider
 
-  // Transparency variants
-  static const Color onSurfaceDisabled = Color(0x61000000);
+  // Transparency variants - Subtle interactions
+  static const Color onSurfaceDisabled = Color(0x61495057);
   static const Color onPrimaryDisabled = Color(0x61FFFFFF);
 
-  // Dark mode colors
-  static const Color darkBackground = Color(0xFF1A1A2E);
-  static const Color darkSurface = Color(0xFF16213E);
-  static const Color darkOnBackground = Color(0xFFE0E0E0);
-  static const Color darkOnSurface = Color(0xFFE0E0E0);
-  static const Color darkHint = Color(0x80FFFFFF);
-  static const Color darkDisabled = Color(0x62FFFFFF);
+  // Dark mode colors - Rich but not gloomy
+  static const Color darkBackground = Color(0xFF2B3035); // Deep warm gray
+  static const Color darkSurface = Color(0xFF343A40);   // Slightly lighter warm gray
+  static const Color darkOnBackground = Color(0xFFF1F3F5); // Bright but not harsh
+  static const Color darkOnSurface = Color(0xFFDEE2E6);   // Soft light gray
+  static const Color darkHint = Color(0xFFADB5BD);        // Medium warm gray
+  static const Color darkDisabled = Color(0x62F1F3F5);    // Semi-transparent light
 }

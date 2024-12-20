@@ -1,4 +1,3 @@
-import 'package:hedieaty/domain/entities/gift.dart';
 
 import '../models/event_model.dart';
 import '../models/friend_model.dart';
@@ -45,6 +44,9 @@ class RealTimeDatabaseHelper {
     return await eventDataSource.getEventsByUserId(userId);
   }
 
+  Future<int> upcomingEvents(String userId) async {
+    return await eventDataSource.countUpcomingEventsForUser(userId);
+  }
 
     Future<void> updateEvent(String id, EventModel event) async {
     await eventDataSource.updateEvent(id, event);
@@ -63,6 +65,11 @@ class RealTimeDatabaseHelper {
     return await friendDataSource.fetchAllFriends();
   }
 
+  Future<List<FriendModel>> getFriendByUserId(String userId) async {
+    return await friendDataSource.fetchFriendsByUserId(userId);
+  }
+
+
   Future<FriendModel?> getFriendById(String userId, String friendId) async {
    return await friendDataSource.getFriendById(userId, friendId);
   }
@@ -70,6 +77,13 @@ class RealTimeDatabaseHelper {
   Future<bool> isFriendExistsRemotely({required String userId, required String friendId}) async {
     return await friendDataSource.isFriendExistsRemotely(userId: userId, friendId: friendId);
   }
+
+
+  Future<List<FriendModel>> getFriendsByUserId(String userId) async {
+    return await friendDataSource.getFriendsByUserId(userId);
+  }
+
+
 
   Future<void> deleteFriend(String userId, String friendId) async {
     await friendDataSource.deleteFriend(userId, friendId);
@@ -104,17 +118,16 @@ class RealTimeDatabaseHelper {
   Future<void> deleteGift(String id) async {
     await giftDataSource.deleteGift(id);
   }
-
-  //
-  // Future<void> toggleGiftStatus(String giftId, String newStatus) async {
-  //   await giftDataSource.toggleGiftStatus(giftId, newStatus);
-  // }
-
   Future<List<GiftModel>> fetchGiftsByUserId(String userId) async {
     return await giftDataSource.fetchGiftsByUserId(userId);
   }
 
-  Future<List<GiftModel>> fetchGiftsByEventAndStatus(String eventId, String status) async {
+  Future<List<GiftModel>> fetchGiftsPledgedByUser(String gifterId) async {
+     return await giftDataSource.fetchGiftsPledgedByUser(gifterId);
+  }
+
+
+    Future<List<GiftModel>> fetchGiftsByEventAndStatus(String eventId, String status) async {
     return await giftDataSource.fetchGiftsByEventAndStatus(eventId, status);
   }
 

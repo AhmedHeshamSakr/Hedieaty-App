@@ -59,6 +59,7 @@ class GiftModel extends Gift {
   }
 
   // Convert Model to JSON
+  @override
   Map<String, dynamic> toJson() {
     return {
       'id': id,

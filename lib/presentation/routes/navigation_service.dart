@@ -10,7 +10,7 @@ class NavigationService {
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   /// Navigate to a specific route with optional arguments
-  Future<dynamic> navigateTo(String routeName, {Object? arguments}) {
+  Future<void> navigateTo(String routeName, {Object? arguments}) {
     return navigatorKey.currentState!.pushNamed(routeName, arguments: arguments);
   }
 

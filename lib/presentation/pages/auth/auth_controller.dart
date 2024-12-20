@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import '../../../data/utils/firebase_auth_service.dart';
+import '../../../data/utils/sync_database.dart';
+import '../addFrinds/add_frinds_controller.dart';
 
 class AuthController extends ChangeNotifier {
   final FirebaseAuthService _authService;
+  final SyncService _syncService;
 
-  AuthController(this._authService);
+  AuthController(this._authService, this._syncService);
 
   String? _errorMessage;
   bool _isLoading = false;

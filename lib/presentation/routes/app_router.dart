@@ -38,7 +38,12 @@ class AppRouter {
         return _buildGiftListRoute(settings);
 
       case RouteNames.profile:
-        return MaterialPageRoute(builder: (_) => const ProfilePage());
+      // Safely handle userId from arguments
+        final args = settings.arguments as Map<String, dynamic>?;
+        final userId = args?['userId'] ?? ''; // Default to empty string if null
+        return MaterialPageRoute(
+          builder: (_) => ProfilePage(userId: userId),
+        );
 
       case RouteNames.addFriend:
         return MaterialPageRoute(builder: (_) => const AddFriendsPage());

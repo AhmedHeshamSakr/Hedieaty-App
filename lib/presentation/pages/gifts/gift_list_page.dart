@@ -158,9 +158,6 @@ class _GiftListPageState extends State<GiftListPage> {
                                 giftController: giftController,
                                 gift: gift,
                                 isViewOnly: widget.isViewOnly, // Pass the flag here
-
-                                // Pass isViewOnly to gift details
-                                // isViewOnly: widget.isViewOnly,
                               ),
                             ),
                           );

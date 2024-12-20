@@ -57,8 +57,15 @@ class _AddFriendsPageState extends State<AddFriendsPage> {
               itemBuilder: (context, index) {
                 final friend = friendsController.friendsDetails[index];
                 return ListTile(
+
                   title: Text(friend.name ?? "No Name"),
                   subtitle: Text(friend.email ?? "No Email"),
+                    trailing: IconButton(
+                      icon: const Icon(Icons.delete, color: Colors.grey),
+                      onPressed: () async {
+                      await friendsController.deleteFriend(friend.id);
+                      },
+                    ),
                   onTap: () {
                     Navigator.push(
                       context,

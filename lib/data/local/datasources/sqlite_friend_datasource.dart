@@ -40,8 +40,10 @@ class SQLiteFriendDataSource {
   }
 
 
-  Future<void> deleteFriend(String friendId) async {
+  Future<void> deleteFriend(String friendId ,String userId) async {
     await db.delete('friends', where: 'friendId = ?', whereArgs: [friendId]);
+    await db.delete('friends', where: 'friendId = ?', whereArgs: [userId]);
+
   }
 }
 

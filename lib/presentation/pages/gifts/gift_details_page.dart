@@ -1,8 +1,10 @@
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../data/utils/notification_service.dart';
 import '../../../domain/entities/gift.dart';
 import 'gift_controller.dart';
 
@@ -51,7 +53,33 @@ class _GiftDetailsPageState extends State<GiftDetailsPage> {
     // Determine availability status
     isAvailable = widget.gift.status != 'Pledged';
     currentUserId = FirebaseAuth.instance.currentUser?.uid ?? '';
+    listenForGiftStatusUpdates(widget.gift.id);
 
+  }
+
+  void listenForGiftStatusUpdates(String giftId) {
+    FirebaseDatabase.instance
+        .ref('gifts/$giftId')
+        .onValue
+        .listen((event) {
+      final data = event.snapshot.value as Map?;
+      if (data != null) {
+        final status = data['status'];
+        final giftName = data['name'];
+        // Trigger notification if status changes to 'Pledged'
+        if (status == 'Pledged' && currentUserId == widget.gift.userId) {
+          // NotificationService().showGiftPledgedNotification(
+          //   giftName: giftName,
+          //   giftDescription: 'Someone pledged for "$giftName"!',
+          //   bigPicture: null,
+          // );
+        }
+        // Update the local state for UI
+        setState(() {
+          isAvailable = status != 'Pledged';
+        });
+      }
+    });
   }
 
   // Method to pick an image from gallery or camera
@@ -125,6 +153,14 @@ class _GiftDetailsPageState extends State<GiftDetailsPage> {
                       onChanged: (value) async {
                         if (value) {
                           await widget.giftController.pledgeGift(widget.gift.id);
+                          // Trigger a notification when the gift is pledged
+                          if (currentUserId == widget.gift.userId) {
+                            await NotificationService().showGiftPledgedNotification(
+                              giftName: widget.gift.name,
+                              giftDescription: 'Someone pledged for "${widget.gift.name}"!',
+                              bigPicture: null, // Add an image URL if available
+                            );
+                          }
                         } else {
                           await widget.giftController.unpledgeGift(widget.gift.id);
                         }
@@ -156,11 +192,7 @@ class _GiftDetailsPageState extends State<GiftDetailsPage> {
                       eventId: widget.gift.eventId,
                       userId: widget.gift.userId,
                     );
-
-                    // Update the gift
                     widget.giftController.updateGift(updatedGift);
-
-                    // Return to previous screen
                     Navigator.pop(context);
                   },
                   child: const Text("Save"),
@@ -174,7 +206,6 @@ class _GiftDetailsPageState extends State<GiftDetailsPage> {
 
   @override
   void dispose() {
-    // Dispose controllers to prevent memory leaks
     nameController.dispose();
     descriptionController.dispose();
     categoryController.dispose();

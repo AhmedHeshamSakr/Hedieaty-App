@@ -17,20 +17,13 @@ class FriendsController extends ChangeNotifier {
   Future<void> loadFriends() async {
     isLoading = true;
     notifyListeners();
-
     try {
       final currentUserId = firebase_auth.FirebaseAuth.instance.currentUser?.uid;
       if (currentUserId == null) {
         throw Exception('No authenticated user');
       }
-
-      // Sync remote and local database
-      await repository.syncDatabases(currentUserId);
-
-      // Fetch friends from the local database
       final friends = await repository.getFriends();
       friendsDetails = [];
-
       for (final friend in friends) {
         final user = await repository.getUser(friend.friendId);
         if (user != null) {
@@ -47,6 +40,7 @@ class FriendsController extends ChangeNotifier {
       notifyListeners();
     }
   }
+
 
 
   // Add a friend by email
@@ -95,12 +89,12 @@ class FriendsController extends ChangeNotifier {
       if (currentUserId.isEmpty) {
         throw Exception('No authenticated user');
       }
-
       // Delete friend relationship
       await repository.deleteFriend(friendId);
-
       // Refresh the local list
       friendsDetails.removeWhere((friend) => friend.id == friendId);
+      print('Friends after deletion: $friendsDetails');
+
       notifyListeners();
     } catch (e) {
       debugPrint('Error deleting friend: $e');
@@ -109,7 +103,6 @@ class FriendsController extends ChangeNotifier {
 
   void syncFriendsWithRemote(String currentUserId){
      repository.syncFriendsWithRemote(currentUserId);
-
   }
   Future<void> syncDatabases(String currentUserId)async{
     await repository.syncDatabases(currentUserId);

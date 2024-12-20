@@ -1,16 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:hedieaty/domain/entities/gift.dart';
 
 import '../../models/gift_model.dart';
 
 class GiftRemoteDataSource {
   final DatabaseReference _dbRef = FirebaseDatabase.instance.ref("gifts");
-  final DatabaseReference _friendsRef = FirebaseDatabase.instance.ref("friends");
-
-
-
   Future<GiftModel> createGift(GiftModel gift) async {
     final currentUser = FirebaseAuth.instance.currentUser;
     if (currentUser == null) {
@@ -150,6 +145,23 @@ class GiftRemoteDataSource {
 
     return updatedGift;
   }
+
+  Future<List<GiftModel>> fetchGiftsPledgedByUser(String gifterId) async {
+    final snapshot = await _dbRef
+        .orderByChild("gifterId")
+        .equalTo(gifterId)
+        .get();
+
+    if (snapshot.exists) {
+      final giftsMap = Map<String, dynamic>.from(snapshot.value as Map);
+      return giftsMap.values
+          .map((json) => GiftModel.fromJson(Map<String, dynamic>.from(json)))
+          .toList();
+    }
+
+    return [];
+  }
+
 
 
 

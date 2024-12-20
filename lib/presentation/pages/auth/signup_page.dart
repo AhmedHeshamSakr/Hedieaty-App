@@ -188,7 +188,7 @@ class _SignupPageState extends State<SignupPage> {
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
-                  child: const Text('Create Account'),
+                  child: const Text('Sign Up'),
                 ),
 
                 // Error Message Display

@@ -1,46 +1,40 @@
 import 'package:flutter/material.dart';
-import '../../routes/navigation_service.dart';
-import '../../routes/route_names.dart'; // Your route names
+import '../../../domain/entities/user.dart';
+import '../../../domain/repositories/main_repository.dart';
 
 class HomePageController extends ChangeNotifier {
+  final Repository repository;
+  HomePageController(this.repository);
+
   int _selectedIndex = 0;
-
-  // The list of routes and icons corresponding to each bottom navigation item
-  final List<Map<String, dynamic>> _navItems = [
-    {'icon': Icons.event, 'route': RouteNames.eventList},
-    {'icon': Icons.person, 'route': RouteNames.profile},
-    {'icon': Icons.card_giftcard, 'route': RouteNames.giftList},
-    {'icon': Icons.contact_phone, 'route': RouteNames.addFriend},
-  ];
-
   int get selectedIndex => _selectedIndex;
-  List<Map<String, dynamic>> get navItems => _navItems;
 
-  // Method to handle navigation and updating the selected tab
-  void onItemTapped(int index, BuildContext context) {
-    if (_selectedIndex == index) return; // Prevent unnecessary navigation
+  String _searchQuery = '';
+  String get searchQuery => _searchQuery;
+  final List<User> _friends = []; // Initialize as an empty list
 
-    _selectedIndex = index; // Update selected index immediately
-    notifyListeners(); // Notify listeners so UI can rebuild with the new selected index
+  List<User> _filteredFriends = [];
+  List<User> get filteredFriends => _filteredFriends;
 
-    final route = _navItems[index]['route'];
 
-    // Navigate to the selected route using NavigationService
-    NavigationService().navigateTo(route).then((_) {
-      // Optionally reset the index to home (0) when returning to the home page
-      if (route == RouteNames.home) {
-        _selectedIndex = 0; // Reset to home tab when navigating back to home page
-        notifyListeners();
-      }
-    });
+  void handleSearch(String query) {
+    _searchQuery = query.toLowerCase();
+    _filteredFriends = query.isEmpty
+        ? List.from(_friends)
+        : _friends.where((friend) =>
+    friend.name?.toLowerCase().contains(_searchQuery) ?? false).toList();
+    notifyListeners();
+  }
+
+  void onItemTapped(int index) {
+    _selectedIndex = index;
+    notifyListeners();
   }
 
   void logout(BuildContext context) {
-    _selectedIndex = 0; // Reset to home tab on logout
+    _selectedIndex = 0;
     notifyListeners();
-
-    // Navigate to login screen and clear navigation stack
-    NavigationService().navigateAndClear(RouteNames.login);
+    Navigator.of(context).pushNamedAndRemoveUntil('/login', (route) => false);
   }
 
   void unfocusSearch(FocusNode searchFocusNode) {

@@ -58,10 +58,48 @@ class FriendRemoteDataSource {
     return null;
   }
 
+  Future<List<FriendModel>> fetchFriendsByUserId(String userId) async {
+    try {
+      final snapshot = await _dbRef.child(userId).get();
+      if (snapshot.exists) {
+        final friendsMap = snapshot.value as Map<dynamic, dynamic>;
+        return friendsMap.keys
+            .where((friendId) => friendId != null) // Remove null friendIds
+            .map((friendId) {
+          final friendIdStr = friendId.toString();
+          if (friendIdStr.isEmpty) {
+            throw Exception('Friend ID cannot be empty');
+          }
+          return FriendModel(
+            userId: userId,
+            friendId: friendIdStr,
+          );
+        })
+            .toList();
+      }
+      return [];
+    } catch (e) {
+      print('Error fetching friends for user $userId: $e');
+      return [];
+    }
+  }
+
+  Future<List<FriendModel>> getFriendsByUserId(String userId) async {
+    final snapshot = await _dbRef.orderByChild('userId').equalTo(userId).get();
+    if (snapshot.exists) {
+      final friends = snapshot.children.map((child) {
+        final friendData = Map<String, dynamic>.from(child.value as Map);
+        return FriendModel.fromJson(friendData);
+      }).toList();
+      return friends;
+    }
+    return [];
+  }
+
+
   Future<void> deleteFriend(String userId, String friendId) async {
     // Remove friendId under userId
     await _dbRef.child(userId).child(friendId).remove();
-
     // Remove reciprocal relationship
     await _dbRef.child(friendId).child(userId).remove();
   }
