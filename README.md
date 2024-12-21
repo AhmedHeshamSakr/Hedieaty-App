@@ -37,9 +37,7 @@ The app follows **Clean Architecture**, ensuring modularity, scalability, and ma
 │   ├── pages/          # UI components and controllers
 │   ├── routes/         # App navigation setup
 │   ├── widgets/         # App navigation setup
-├── test/               # Automated testing
-│   ├── unit/           # Unit tests for core functionalities
-│   ├── widget/         # Tests for UI components
+├── test/               # Automated testing        
 │   ├── integration/    # End-to-end tests for workflows
 ```
 
@@ -98,7 +96,7 @@ The app follows **Clean Architecture**, ensuring modularity, scalability, and ma
 ### **How to Contribute**
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-repo/hedieaty.git
+   git clone[ https://github.com/your-repo/hedieaty](https://github.com/AhmedHeshamSakr/Hedieaty-App).git
    ```
 2. Install dependencies:
    ```bash
@@ -116,8 +114,8 @@ The app follows **Clean Architecture**, ensuring modularity, scalability, and ma
 ---
 
 ### **Deployment**
-- Published on **App Store**, **Google Play Store**, and **Amazon App Store**.
-- Access the app here: [Link to App Store Pages].
+- Published **Amazon App Store**.
+- Access the app here: [   ].
 
 ---
 
