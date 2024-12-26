@@ -115,7 +115,7 @@ The app follows **Clean Architecture**, ensuring modularity, scalability, and ma
 
 ### **Deployment**
 - Published **Amazon App Store**.
-- Access the app here: [   ].
+- Access the app here: [ https://www.amazon.com/dp/B0DRGH5C4W/ref=sr_1_1?dib=eyJ2IjoiMSJ9.VjhaqML9epRiBHepbiwkj-RbqryuKY5SAodcAbfS9JPZ4kRhYZ-3s4OX0ojCP2sf7Nu5Y_FFiqLpwViTaO79tfvIquUXRxFuklmhVjoW5p4.DolXlZsTjZ4VqHeSIjF2VKbqWcthe5sNuvoUtyaIzcU&dib_tag=se&keywords=Hideaty&qid=1735176026&s=mobile-apps&sr=1-1  ].
 
 ---
 
