@@ -1,6 +1,15 @@
-### Hedieaty: Gift List Management App
+## Hedieaty: Gift List Management App
 
 **Hedieaty** is a Flutter-based app designed to streamline creating, managing, and sharing gift lists for special occasions. The app features intuitive UI, barcode scanning, real-time cloud syncing, and notifications to enhance the joy of gift-giving.
+
+### Login & HomePage
+<img width="749" alt="Screenshot 2025-06-30 at 11 04 14 AM" src="https://github.com/user-attachments/assets/b0528ee2-1ee9-4ddb-b99f-9623be6ca397" />
+### Events & Gifts 
+<img width="800" alt="Screenshot 2025-06-30 at 11 04 51 AM" src="https://github.com/user-attachments/assets/b3a46614-d720-4fe4-aba5-7098d62e33a6" />
+### Friends List & their Gifts 
+<img width="800" alt="Screenshot 2025-06-30 at 11 05 15 AM" src="https://github.com/user-attachments/assets/e61f0016-0a9d-483d-9b59-0d6ebb545f8e" />
+### Profile Page
+<img width="491" alt="Screenshot 2025-06-30 at 11 05 37 AM" src="https://github.com/user-attachments/assets/a7516a02-083f-4704-8199-82349cedab0f" />
 
 ---
 
